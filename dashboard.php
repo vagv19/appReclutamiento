@@ -10,7 +10,7 @@
 				<div class="col-sm-5">AH-10001</div>
 				<div class="col-sm-6 pull-right">
 					<div class="col-sm-9" style="text-align:right">Clasificacion:</div>
-					<div class="col-sm-3">BA</div>
+					<div class="col-sm-3">Bolsa AHMSA</div>
 				</div>
 				</div>
 			</h4>
