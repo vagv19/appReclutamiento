@@ -204,6 +204,11 @@ $("#btnGuardarEntrevista").click(function() {
        }
     });
 });
+$("body").delegate("#btnAgregarDimensionEntrevista","click",function(){
+    alert($("#cmbDimension").val()+' '+$("#cmbResultado").val());
+    alert($("cmbDimension option:selected").next().val());
+    alert($("cmbDimension option:selected+option").val());
+});
 /*    $('body').onunload=function(e)
     {
         "use strict";
