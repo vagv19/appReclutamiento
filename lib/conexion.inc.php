@@ -1,6 +1,6 @@
 <?php 
 $dvr='postgres8';
-$svr='132.132.11.177';
+$svr='localhost';
 $usr='postgres';
 $pwd='Pa$$w0rd';
 $db='reclutamiento';
