@@ -661,6 +661,10 @@ where idempleado = $idempleado";
                 </div>';
                 echo $htmlObject;
             break;
+            case '29':
+                $identrevistadimension = '(select coalesce(max(identrevistadimension)) from entrevistadimension)';
+                $sql = "inser into entrevistadimension values($identrevistadimension,$identrevista,$cmbDimension,$cmbResultado)";
+            break;
 			default:
                 
 				die("No estas autorizado para estar aqui");

@@ -205,9 +205,12 @@ $("#btnGuardarEntrevista").click(function() {
     });
 });
 $("body").delegate("#btnAgregarDimensionEntrevista","click",function(){
-    alert($("#cmbDimension").val()+' '+$("#cmbResultado").val());
-    alert($("cmbDimension option:selected").next().val());
-    alert($("cmbDimension option:selected+option").val());
+    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=",function(){
+    
+    });
+    //cambiar valor
+    $("#cmbDimension").val($("#cmbDimension option:selected").next().val());
+    
 });
 /*    $('body').onunload=function(e)
     {
