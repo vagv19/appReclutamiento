@@ -57,43 +57,45 @@
   <div class="tab-pane" id="cursocandidato">...</div>
   <div class="tab-pane" id="entrevistacandidato">
     <form id="frmEntrevista" class="form-horizontal" role="form" style="margin-top:5px;">
-        <input type="hidden" id="idEntrevista" />
-        <div class="form-group">
-			<label for="txtFecha" class="col-sm-2 control-label">Fecha</label>
-				<div class="col-sm-7">
-                    <input type="text" class="form-control" id="txtFecha" data-required="false"  name="txtFecha" data-date-language="es" value="" placeholder="Fecha">
-				</div>
-		</div>
-        <div class="form-group">
-			<label for="cmbPresentacion" class="col-sm-2 control-label">Presentacion</label>
-				<div class="col-sm-7">
-					<select id="cmbPresentacion" name="cmbPresentacion" class="form-control">
-					</select>
-				</div>
-		</div>
-        <div class="form-group">
-			<label for="txtLogros" class="col-sm-2 control-label">Logros</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="txtLogros" data-required="false"  name="txtLogros" value="" placeholder="logros">
-				</div>
-		</div>
-        <div class="form-group">
-			<label for="txtObservaciones" class="col-sm-2 control-label">observaciones</label>
-            <div class="col-sm-7">
-                <input type="text" class="form-control" id="txtObservaciones" data-required="false"  name="txtObservaciones" data-date-language="es" value="" placeholder="observaciones">
+        <fieldset disabled>
+            <input type="hidden" id="idEntrevista" name='idEntrevista' value="0" />
+            <div class="form-group">
+                <label for="txtFecha" class="col-sm-2 control-label">Fecha</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="txtFecha" data-required="false"  name="txtFecha" data-date-language="es" value="" placeholder="Fecha">
+                    </div>
             </div>
-		</div>
-        <div class="form-group">
-			<label for="cmbTipoEntrevista" class="col-sm-2 control-label">Tipo Entrevista</label>
-            <div class="col-sm-7">
-                <select id="cmbTipoEntrevista" name="cmbTipoEntrevista" class="form-control">
-                </select>
+            <div class="form-group">
+                <label for="cmbPresentacion" class="col-sm-2 control-label">Presentacion</label>
+                    <div class="col-sm-7">
+                        <select id="cmbPresentacion" name="cmbPresentacion" class="form-control">
+                        </select>
+                    </div>
             </div>
-		</div>
-        <div class="col-sm-9">
-            <button type="button" class="btn btn-default pull-right" id="btnGuardarEntrevista">Guardar <i class="glyphicon glyphicon-floppy-disk"></i></button>
-        </div> 
-      </form>
+            <div class="form-group">
+                <label for="txtLogros" class="col-sm-2 control-label">Logros</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="txtLogros" data-required="false"  name="txtLogros" value="" placeholder="logros">
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="txtObservaciones" class="col-sm-2 control-label">observaciones</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="txtObservaciones" data-required="false"  name="txtObservaciones" data-date-language="es" value="" placeholder="observaciones">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cmbTipoEntrevista" class="col-sm-2 control-label">Tipo Entrevista</label>
+                <div class="col-sm-7">
+                    <select id="cmbTipoEntrevista" name="cmbTipoEntrevista" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <button type="button" class="btn btn-default pull-right" id="btnGuardarEntrevista">Guardar <i class="glyphicon glyphicon-floppy-disk"></i></button>
+            </div>
+        </fieldset>     
+    </form>
     <div id="divDimension"></div>
   </div>
   <div class="tab-pane" id="estudiocandidato">

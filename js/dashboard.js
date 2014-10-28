@@ -47,6 +47,15 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
                  titleMBox = "Entrevista";
                  servicio = "25";
                  tabla = "entrevista";
+            break;
+            case 'entrevistadimension':
+                titleMBox = "Editar Dimension";
+                 sendRequest("POST","lib/consultas/servicio.php",true,"servicio=28&identrevista="+$("#idEntrevista").val(),function(data){
+              $("#mBoxContainer").html(data);
+              $("#mBox").modal('show');
+           });
+            return;     
+            break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla+"&campo="+$(this).attr('data-campo')+"&id="+$(this).attr("data-id"),function(data){
 		        	$("#mBoxHeader").html(titleMBox);
@@ -80,6 +89,10 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
 		 	break;
             case "cursocandidato":
                 servicio = "24";
+            break;
+            case 'entrevistadimension':
+                 mensaje("2","No puedes eliminar las dimensiones");
+            return;
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla+"&accion=delete&id="+$(this).attr("data-id"),function(data){
@@ -112,6 +125,15 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
                  titleMBox = "Cursos";
 		 		servicio = "23";
                  tabla = "candidatocurso";
+            break;
+            case 'entrevistadimension':
+                 mensaje("2","No puedes agregar las dimensiones");
+            return;
+            break; 
+            case 'estudiocandidato':
+                 titleMBox = "Estudios del Candidato";
+                 servicio = "33";
+                 $tabla = "estudio"
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla,function(data){
@@ -183,7 +205,25 @@ $(".nav.nav-tabs > li").click(function(){
 		 		campos = "idcandidatocurso,\"Curso\"";
 		 	break;
             case "entrevistacandidato":
-                 $('#txtFecha').datepicker({format: 'yyyy-mm-dd'});				        
+                 $('#txtFecha').datepicker({format: 'yyyy-mm-dd'});
+                 sendRequest("POST","lib/consultas/servicio.php",false,"servicio=31",function(data){
+                    if( data == "0")
+                    {
+                        $("#frmEntrevista > fieldset").attr("disabled",false);   
+                    }
+                     else{
+                         var request = ($.parseJSON(data))[0]; 
+                     $("#idEntrevista").val(request.identrevista);
+                     $("#txtFecha").val(request.fecha);
+                     $("#cmbPresentacion").val(request.idpresentacion);
+                     $("#txtLogros").val(request.logros);
+                     $("#txtObservaciones").val(request.observaciones);
+                     $("#cmbTipoEntrevista").val(request.idtipoentrevista);
+                     sendRequest("POST","lib/consultas/servicio.php",true,"servicio=32&identrevista="+request.identrevista,function(data){
+                        $("#divDimension").html(data); 
+                     });
+                     }
+                 });
                  return;
             break;     
 		 }
@@ -198,6 +238,7 @@ $("#btnGuardarEntrevista").click(function() {
        {
            $("#mBoxHeader").text('Habilidades');
            sendRequest("POST","lib/consultas/servicio.php",true,"servicio=28&identrevista="+response.id,function(data){
+               $("#idEntrevista").val(response.id);
               $("#mBoxContainer").html(data);
               $("#mBox").modal('show');
            });
@@ -205,12 +246,28 @@ $("#btnGuardarEntrevista").click(function() {
     });
 });
 $("body").delegate("#btnAgregarDimensionEntrevista","click",function(){
-    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=",function(){
-    
+    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=29&"+$("#frmEntrevistaDimension").serialize(),function(data){
+        var request = $.parseJSON(data);
+        if(request.codigo == "1")
+        {
+            
+            $("#cmbDimension").val($("#cmbDimension option:selected").next().val());
+            sendRequest("POST","lib/consultas/servicio.php",true,"servicio=30&identrevista="+$("#identrevista").val(),function(data){
+               $("#entrevistaContainer").html(data); 
+                sendRequest("POST","lib/consultas/servicio.php",true,"servicio=32&identrevista="+$("#identrevista").val(),function(data){
+                        $("#divDimension").html(data); 
+                     });
+            });
+        }
     });
     //cambiar valor
-    $("#cmbDimension").val($("#cmbDimension option:selected").next().val());
-    
+    if($("#cmbDimension option:selected").val() == $("#cmbDimension option:last-child").val())
+            {
+                mensaje("1","Se han guardado todas las habilidades al candidato");
+                $("#btnCerrarModal").click();
+                $("#frmEntrevista > fieldset").attr("disabled",true);
+                return;
+            }
 });
 /*    $('body').onunload=function(e)
     {

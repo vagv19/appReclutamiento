@@ -2,6 +2,7 @@
 header('Content-language: es');
 	include_once 'cconexion.php';
 	include_once("paginacion.php");
+    include_once "HTMLObject.class.php";
 	if($_REQUEST)
 	{
 		extract($_REQUEST);
@@ -636,8 +637,8 @@ where idempleado = $idempleado";
             case '28':
                 $cnx = new conexion();
                 $idtipoentrevista = "(select idtipoentrevista from entrevista where identrevista=$identrevista)";
-                $htmlObject = '<form class="form-horizontal" role="form" >
-                    <input type="hidden" name="identrevista" value="'.$identrevista.'" />
+                $htmlObject = '<form id="frmEntrevistaDimension" class="form-horizontal" role="form" >
+                    <input type="hidden" id="identrevista" name="identrevista" value="'.$identrevista.'" />
                     <div class="form-group">
                         <label for="cmbDimension" class="col-sm-2 control-label">Dimension</label>
                         <div class="col-sm-7">
@@ -662,13 +663,44 @@ where idempleado = $idempleado";
                 echo $htmlObject;
             break;
             case '29':
-                $identrevistadimension = '(select coalesce(max(identrevistadimension)) from entrevistadimension)';
-                $sql = "inser into entrevistadimension values($identrevistadimension,$identrevista,$cmbDimension,$cmbResultado)";
+                $cnx = new conexion();
+                $sql = "select * from entrevistadimension where identrevista=$identrevista and iddimension=$cmbDimension";
+                $rs = $cnx->returnRS($sql);
+                if($rs !== null)
+                {
+                    $sql = "update entrevistadimension set idresultado= $cmbResultado where identrevista= $identrevista and iddimension= $cmbDimension";                    
+                }
+                else
+                {
+                    $identrevistadimension = '(select coalesce(max(identrevistadimension)+1,1) from entrevistadimension)';
+                    $sql = "insert into entrevistadimension values($identrevistadimension,$identrevista,$cmbDimension,$cmbResultado)";
+                }
+                execQuery($sql);
+            break;
+            case '30':
+                $sql = 'select dimension,resultado from dimensionresultado where identrevista = '.$identrevista;
+                $cnx = new conexion();
+				echo $cnx->returnTabla($sql);
+            break;
+            case '31':
+                $sql = 'select * from entrevista where idcandidato=15 and identrevista=(select max(identrevista) from entrevista where status=1)';
+                $cnx = new conexion();
+                echo $cnx->returnJSON($sql);
+            break;
+            case '32':
+                $sql = 'select identrevistadimension,dimension,resultado from dimensionresultado where identrevista ='.$identrevista;
+                $cnx = new conexion();
+                echo $cnx->returnTablaEdicion($sql,'entrevistadimension');
+            break;
+            case '33':
+                $object = new HTMLObject('estudio');
+                echo '<form class="form-horizontal" role="form">'.$object->returnHTMLObject().'</form>';
             break;
 			default:
                 
 				die("No estas autorizado para estar aqui");
 			break;
+            
 		}
 	}
 function execQuery($sql)
