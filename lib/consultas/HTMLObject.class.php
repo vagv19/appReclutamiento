@@ -65,16 +65,25 @@ where table_name = '$table'
 			{
 				$objeto .= '<input type="hidden" name="status" id="status" />';
 			}
+            elseif($r['columna'] == 'idcandidato')
+            {
+                
+            }
 			elseif($r["isprimary"] == "1")
 			{
 				$objeto .= '<input type="hidden" name="'.$r["columna"].'" id="'.$r["columna"].'" />';	
 			}
 			elseif($r["isforeign"] == "1")
 			{
-				$objeto .= "<label for='".$r['columna']."'>".$r['columna']."</label>";
-				$objeto .= '<select name="'.$r["columna"].'" id="'.$r["columna"].'" >';
-				$objeto .= $cnx->crearOption('select '.$r["columna"].' as id,descripcion from '.$r['foreigntable'],'-1',true);
+                $objeto .= '<div class="form-group">';
+				$objeto .= "<label for='".$r['columna']."' class='col-sm-2 control-label'>".str_replace("id",'',$r['columna'])."</label>";
+				$objeto .= '<div class="col-sm-7">';
+                $objeto .= '<select name="'.$r["columna"].'" id="'.$r["columna"].'" class="form-control" >';
+				$objeto .= $cnx->crearOption('select '.$r["columna"].' as id,descripcion from '.$r['foreigntable'],'-1');
                 $objeto .= '</select>';
+                $objeto .= '</div>';
+                $objeto .= '</div>';
+                
 			}
 			else
 			{
@@ -82,14 +91,33 @@ where table_name = '$table'
 				$length = $r['length']!='0'?'data-length="'.$r['length'].'"':'';
 				if($r["tipodato"] == "integer" || $r["tipodato"] == "numeric")
 				{
-					$objeto .= "<label for='".$r['columna']."'>".$r['columna']."</label>";
-					$objeto .= '<input id="'.$r['columna'].'" name="'.$r['columna'].'" type="text" data-type="numeric" '.$length.' data-required="'.$datarequired.'" />';
-				}
+                    $objeto .= '<div class="form-group">';
+					$objeto .= "<label for='".$r['columna']."' class='col-sm-2 control-label'>".$r['columna']."</label>";
+					$objeto .= '<div class="col-sm-7">';
+                    $objeto .= '<input id="'.$r['columna'].'" name="'.$r['columna'].'" class="form-control" type="text" data-type="numeric" '.$length.' data-required="'.$datarequired.'" />';
+                    $objeto .= '</div>';
+                    $objeto .= '</div>';
+                }
 				elseif($r['tipodato'] == 'character varying')
 				{
-					$objeto .= "<label for='".$r['columna']."'>".$r['columna']."</label>";
-					$objeto .= '<input id="'.$r['columna'].'" name="'.$r['columna'].'" type="text" data-type="alphanumeric" '.$length.' data-required="'.$datarequired.'" />';	
+                    $objeto .= '<div class="form-group">';
+					$objeto .= "<label for='".$r['columna']."' class='col-sm-2 control-label'>".$r['columna']."</label>";
+                    $objeto .= '<div class="col-sm-7">';
+					$objeto .= '<input id="'.$r['columna'].'" name="'.$r['columna'].'" class="form-control"  type="text" data-type="alphanumeric" '.$length.' data-required="'
+                    .$datarequired.'" />';	
+                    $objeto .= '</div>';
+                    $objeto .= '</div>';
 				}
+                elseif($r['tipodato'] == 'date')
+                {
+                   $objeto .= '<div class="form-group">';
+					$objeto .= "<label for='".$r['columna']."' class='col-sm-2 control-label'>".$r['columna']."</label>";
+                    $objeto .= '<div class="col-sm-7">';
+					$objeto .= '<input id="'.$r['columna'].'" name="'.$r['columna'].'" class="form-control"  type="text" data-type="date" '.$length.' data-required="'
+                    .$datarequired.'" />';	
+                    $objeto .= '</div>';
+                    $objeto .= '</div>'; 
+                }
 			}
 
 		}

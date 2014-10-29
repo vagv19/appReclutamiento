@@ -133,7 +133,7 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
             case 'estudiocandidato':
                  titleMBox = "Estudios del Candidato";
                  servicio = "33";
-                 $tabla = "estudio"
+                 $tabla = "estudio";
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla,function(data){
@@ -174,6 +174,12 @@ $("body").delegate("#btnGuardarModal","click",function(){
             case "cursocandidato" :
                  servicio = "24";
                  tabla = "candidatocurso"
+            break;
+            case "estudiocandidato":
+                 servicio = "34";
+                 tabla = "estudio";
+                 //alert($("#frmestudio").serialize()+"&accion="+accion);
+                 //return;//temporal remover
             break;     
 		 }
 		 sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla+"&"+$("#frm"+tabla).serialize()+"&accion="+accion,function(data){

@@ -77,6 +77,10 @@ $("input[data-length]").blur(function(){
 		});
 	}
 });
+$("body").delegate("input[data-type='date']","focus",function(){
+    //alert('test')
+    $("input[data-type='date']").datepicker({format: 'yyyy-mm-dd'});    
+});
 function mostrarPrestacion(objeto){
 	var id = $(objeto).attr('data-id');
 	sendRequest("POST","lib/consultas/servicio.php",true,"servicio=14&id="+id,function(data){

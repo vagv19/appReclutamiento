@@ -683,7 +683,7 @@ where idempleado = $idempleado";
 				echo $cnx->returnTabla($sql);
             break;
             case '31':
-                $sql = 'select * from entrevista where idcandidato=15 and identrevista=(select max(identrevista) from entrevista where status=1)';
+                $sql = 'select * from entrevista where idcandidato=1 and identrevista=(select max(identrevista) from entrevista where status=1)';
                 $cnx = new conexion();
                 echo $cnx->returnJSON($sql);
             break;
@@ -692,10 +692,18 @@ where idempleado = $idempleado";
                 $cnx = new conexion();
                 echo $cnx->returnTablaEdicion($sql,'entrevistadimension');
             break;
-            case '33':
-                $object = new HTMLObject('estudio');
-                echo '<form class="form-horizontal" role="form">'.$object->returnHTMLObject().'</form>';
+            case '33':               
+                echo include_once "../../estudio.php";
             break;
+            case '34':
+                switch($accion)
+                {
+                    case 'insert':
+                        $idestudio = '(select coalesce(max(idestudio)+1,1) from estudio)';
+                        $sql = "insert into estudio values($idestudio,'$fechainicio','$fechafin',$grado,$idcicloescolar,$idcarrera,$idinstitucion,'$titulo','$cedulaprofesional',$promedio,1);";
+                        execQuery($sql);
+                    break;
+                }
 			default:
                 
 				die("No estas autorizado para estar aqui");
