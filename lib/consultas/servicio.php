@@ -692,8 +692,9 @@ where idempleado = $idempleado";
                 $cnx = new conexion();
                 echo $cnx->returnTablaEdicion($sql,'entrevistadimension');
             break;
-            case '33':               
-                echo include_once "../../estudio.php";
+            case '33':
+                $file = file_get_contents('http://www.recargatienda.com/');#"../../estudio.php"); #include_once ;
+                echo $file;
             break;
             case '34':
                 switch($accion)
@@ -708,7 +709,36 @@ where idempleado = $idempleado";
                 
 				die("No estas autorizado para estar aqui");
 			break;
-            
+            case '35':
+                 $cnx = new conexion();
+                 $tabcontent = "";
+                 $sql = 'select * from viewcicloescolarmasusado';
+                 $tab = '<ul class="nav nav-tabs">';
+                 $tab .= '<li class="active"><a data-toggle="tab" href="#masUsadas">Mas Usadas</a></li>';
+                 $tab .= '<li><a data-toggle="tab" href="#buscarPorNombre">Buscar <i class="glyphicon glyphicon-search"></i></a></li>';                 
+                 $tab .= '</ul>';
+                 $tabcontent .= '<div class="tab-content" style="margin-top:20px">';
+                 $tabcontent .= '<div id="masUsadas" class="tab-pane fade in active">'.$cnx->returnListGroup($sql,"cmbCicloEscolar").'</div>';
+                 $tabcontent .= '<div id="buscarPorNombre" class="tab-pane fade">
+                            <div class="container">
+                            <div class="col-sm-8 form-group">                                
+                                    <label class="control-label col-sm-4">Buscar</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">                  
+                                      <input type="text" class="form-control"/>
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>  
+                                        </button>
+                                      </span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>             
+                        </div>';
+                 $tabcontent .= '</div>';
+                 echo $tab.$tabcontent."<div id='bsqResultado' class=''></div>";    
+            break;
 		}
 	}
 function execQuery($sql)

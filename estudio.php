@@ -20,17 +20,39 @@
     <div class="form-group">
         <label for="cmbCicloEscolar" class="col-sm-2 control-label">Ciclo Escolar</label>
         <div class="col-sm-7">
-            <select name="cmbCicloEscolar" id="cmbCicloEscolar" class="form-control">
-            </select>
+            <div class="input-group">
+                <select name="cmbCicloEscolar" id="cmbCicloEscolar" class="form-control">
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" data-servicio="" id="btnExaminarCicloEscolar"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div><!-- /input-group -->    
         </div>
     </div>
     <div class="form-group">
         <label for="cmbCarrera" class="col-sm-2 control-label">Carrera</label>
         <div class="col-sm-7">
-            <select name="cmbCarrera" id="cmbCarrera" class="form-control">
-            </select>
+            <div class="input-group">
+                <select name="cmbCarrera" id="cmbCarrera" class="form-control">
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" data-servicio="" id="btnExaminarCarrera"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div><!-- /input-group -->
         </div>
     </div>
+    <div class="form-group">
+        <label for="cmbInstitucion" class="col-sm-2 control-label">Institucion</label>
+        <div class="col-sm-7">
+            <div class="input-group">
+                <select name="cmbInstitucion" id="cmbInstitucion" class="form-control">
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" data-servicio="" id="btnExaminarInstitucion"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div><!-- /input-group -->            
+        </div>
+    </div>    
     <div class="form-group">
         <label for="txtTitulo" class="col-sm-2 control-label">Titulo</label>
         <div class="col-sm-7">
@@ -51,3 +73,5 @@
         </div>
     </div>
 </form>
+<!-- script type="text/javascript" src="js/estudio.js"></script>
+<!-- buscar como cambiar esta incluision de script -->

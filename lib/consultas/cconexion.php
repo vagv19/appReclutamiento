@@ -405,23 +405,15 @@ class conexion
 		}
 		return $listgroup;
 	}
-	function returnListGroup($sql)
+	function returnListGroup($sql,$object)
 	{
 		$rs = $this->returnRS($sql);
-		$listgroup = "";
+		$listgroup = '<div class="list-group">';
 		while($row = $rs->FetchRow())
 		{
-			$listgroup .= '<div class="list-group">
-							  <a href="#" class="list-group-item">
-							    <h4 class="list-group-item-heading">Mision</h4>
-							    <p class="list-group-item-text">'.$row[0].'</p>
-							  </a>
-							  <a href="#" class="list-group-item">
-							    <h4 class="list-group-item-heading">Vision</h4>
-							    <p class="list-group-item-text">'.$row[1].'</p>
-							  </a>
-							</div>';
+			$listgroup .= '<a href="#" data-id="'.$row[0].'" data-object="'.$object.'" class="list-group-item"><i class="glyphicon glyphicon-record"></i> '.$row[1].'</a>';
 		}
+        $listgroup .= '</div>';
 		return $listgroup;
 		
 	}

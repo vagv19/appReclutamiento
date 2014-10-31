@@ -133,7 +133,7 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
             case 'estudiocandidato':
                  titleMBox = "Estudios del Candidato";
                  servicio = "33";
-                 $tabla = "estudio";
+                 tabla = "estudio";
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla,function(data){
@@ -149,6 +149,12 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
 					 	case "candidatoareainteres":
 					 		
 					 	break;
+                        case "estudio":
+                              var script = document.createElement('script');
+                                script.type = 'text/javascript';
+                                 script.src = "js/estudio.js";                                 
+                                $("body").append(script);  
+                         break;
 					 }
 		        });
 	}
@@ -178,6 +184,7 @@ $("body").delegate("#btnGuardarModal","click",function(){
             case "estudiocandidato":
                  servicio = "34";
                  tabla = "estudio";
+                                          
                  //alert($("#frmestudio").serialize()+"&accion="+accion);
                  //return;//temporal remover
             break;     
@@ -231,7 +238,8 @@ $(".nav.nav-tabs > li").click(function(){
                      }
                  });
                  return;
-            break;     
+            break;
+                
 		 }
 	sendRequest("POST","lib/consultas/servicio.php",true,"servicio=14&campos="+campos+"&idcandidato=1&tabla="+tabla,function(data){
 		        	$("#"+tabla).html(data).addClass('active').siblings().removeClass('active');

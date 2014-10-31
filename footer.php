@@ -21,6 +21,25 @@
 			</div>
 		</div>
 	</div>
+    <!--mBoxBusquedas -->
+    <div class="modal fade" id="mBoxBusqueda" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div id="mBoxHeaderBusqueda" class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 id="mBoxTitleBusqueda" class="modal-title" id="myModalLabel">Examinar <i class="glyphicon glyphicon-search"></i></h4>
+				</div>
+				<div id="mBoxBodyBusqueda" class="modal-body">				
+					<div id="mBoxHeaderBusqueda" class="container-fluid"></div>
+					<div id="mBoxContainerBusqueda" class="container-fluid"></div>
+				</div>
+				<div id="mBoxFooterBusqueda" class="modal-footer">
+					<button id="btnCerrarModalBusqueda" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!--mBoxBusquedas -->
 	<div class="modal fade" id="mBoxAlert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
