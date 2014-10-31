@@ -693,7 +693,7 @@ where idempleado = $idempleado";
                 echo $cnx->returnTablaEdicion($sql,'entrevistadimension');
             break;
             case '33':
-                $file = file_get_contents('http://www.recargatienda.com/');#"../../estudio.php"); #include_once ;
+                $file = file_get_contents("../../estudio.php"); #include_once ;
                 echo $file;
             break;
             case '34':
