@@ -701,14 +701,17 @@ where idempleado = $idempleado";
                 {
                     case 'insert':
                         $idestudio = '(select coalesce(max(idestudio)+1,1) from estudio)';
-                        $sql = "insert into estudio values($idestudio,'$fechainicio','$fechafin',$grado,$idcicloescolar,$idcarrera,$idinstitucion,'$titulo','$cedulaprofesional',$promedio,1);";
-                        execQuery($sql);
+                        $sql = "insert into estudio values($idestudio,'$txtFechaInicio','$txtFechaFin',$txtGrado,$cmbCicloEscolar,$cmbCarrera,$cmbInstitucion,'$txtTitulo','$txtCedulaProfesional',1,1,$txtPromedio);";
+                    break;
+                    case 'delete':
+                        $sql = "update estudio set status =0 where idestudio = $idestudio";
+                    break;
+                    case 'update':
+                            $sql = "update estudio set fechainicio='$txtFechaInicio',fechafin='$txtFechaFin',grado=$txtGrado,idcicloescolar=$cmbCicloEscolar,idcarrera=$cmbCarrera,idinstitucion=$cmbInstitucion,titulo=$txtTitulo,cedulaprofesional='$txtCedulaProfesional',promedio=$txtPromedio where idestudio=$idestudio";
                     break;
                 }
-			default:
-                
-				die("No estas autorizado para estar aqui");
-			break;
+            execQuery($sql);
+            break;
             case '35':
                  $cnx = new conexion();
                  $tabcontent = "";
@@ -725,9 +728,9 @@ where idempleado = $idempleado";
                                     <label class="control-label col-sm-4">Buscar</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">                  
-                                      <input type="text" class="form-control"/>
+                                      <input id="txtBuscarCicloEscolar" type="text" class="form-control"/>
                                       <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
+                                        <button id="btnBuscarPorNombre" class="btn btn-default" type="button">
                                             <i class="glyphicon glyphicon-search"></i>  
                                         </button>
                                       </span>
@@ -739,6 +742,84 @@ where idempleado = $idempleado";
                  $tabcontent .= '</div>';
                  echo $tab.$tabcontent."<div id='bsqResultado' class=''></div>";    
             break;
+            case '36':
+                $sql = "select idcicloescolar, descripcion from cicloescolar where descripcion like upper('%$txtBuscarCicloEscolar%')";
+                $cnx = new conexion();
+                echo $cnx->returnListGroup($sql,"cmbCicloEscolar");
+            break;
+            case '37':
+                   $cnx = new conexion();
+                 $tabcontent = "";
+                 $sql = 'select * from viewcarreramasusada';
+                 $tab = '<ul class="nav nav-tabs">';
+                 $tab .= '<li class="active"><a data-toggle="tab" href="#masUsadas">Mas Usadas</a></li>';
+                 $tab .= '<li><a data-toggle="tab" href="#buscarPorNombre">Buscar <i class="glyphicon glyphicon-search"></i></a></li>';                 
+                 $tab .= '</ul>';
+                 $tabcontent .= '<div class="tab-content" style="margin-top:20px">';
+                 $tabcontent .= '<div id="masUsadas" class="tab-pane fade in active">'.$cnx->returnListGroup($sql,"cmbCarrera").'</div>';
+                 $tabcontent .= '<div id="buscarPorNombre" class="tab-pane fade">
+                            <div class="container">
+                            <div class="col-sm-8 form-group">                                
+                                    <label class="control-label col-sm-4">Buscar</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">                  
+                                      <input id="txtBuscarCarrera" type="text" class="form-control"/>
+                                      <span class="input-group-btn">
+                                        <button id="btnBuscarCarreraNombre" class="btn btn-default" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>  
+                                        </button>
+                                      </span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>             
+                        </div>';
+                 $tabcontent .= '</div>';
+                 echo $tab.$tabcontent."<div id='bsqResultado' class=''></div>";  
+            break;
+            case '38':
+                    $sql = "select idcarrera,descripcion from carrera where descripcion like upper('%$txtBuscarCarrera%')";
+                    $cnx = new conexion();
+                    echo $cnx->returnListGroup($sql,"cmbCarrera");
+            break;
+            case '39':
+                     $cnx = new conexion();
+                 $tabcontent = "";
+                 $sql = 'select * from viewinstitucionmasusada';
+                 $tab = '<ul class="nav nav-tabs">';
+                 $tab .= '<li class="active"><a data-toggle="tab" href="#masUsadas">Mas Usadas</a></li>';
+                 $tab .= '<li><a data-toggle="tab" href="#buscarPorNombre">Buscar <i class="glyphicon glyphicon-search"></i></a></li>';                 
+                 $tab .= '</ul>';
+                 $tabcontent .= '<div class="tab-content" style="margin-top:20px">';
+                 $tabcontent .= '<div id="masUsadas" class="tab-pane fade in active">'.$cnx->returnListGroup($sql,"cmbInstitucion").'</div>';
+                 $tabcontent .= '<div id="buscarPorNombre" class="tab-pane fade">
+                            <div class="container">
+                            <div class="col-sm-8 form-group">                                
+                                    <label class="control-label col-sm-1" for="txtBuscarInstitucion">Buscar</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">                  
+                                      <input id="txtBuscarInstitucion" type="text" class="form-control"/>
+                                      <span class="input-group-btn">
+                                        <button id="btnBuscarInstitucionNombre" class="btn btn-default" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>  
+                                        </button>
+                                      </span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>             
+                        </div>';
+                 $tabcontent .= '</div>';
+                 echo $tab.$tabcontent."<div id='bsqResultado' class=''></div>";  
+            break;
+            case '40':
+                    $sql = "select idinstitucion,descripcion from institucion where descripcion like upper('%$txtBuscarInstitucion%')";
+                    $cnx = new conexion();
+                    echo $cnx->returnListGroup($sql,"cmbInstitucion");
+            break;
+			default:                
+				die("No estas autorizado para estar aqui");
+			break;
 		}
 	}
 function execQuery($sql)

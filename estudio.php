@@ -1,4 +1,20 @@
-<form id="frmestudio" class="form-horizontal" role="form"><input type="hidden" name="idestudio" id="idestudio">
+<?php 
+    if($_REQUEST)
+    {
+        extract($_REQUEST);
+        include_once "lib/consultas/cconexion.php";
+        $sql = "select * from estudio where idestudio=$idestudio";
+        $cnx = new conexion();
+        $rs = $cnx->returnRS($sql);
+        $bandera = false;
+        if($rs != null)
+        {
+            $bandera= true;
+            $row = $rs->FetchRow();
+        }
+    }
+?>
+<form id="frmestudio" class="form-horizontal" role="form"><input type="hidden" name="idestudio" id="idestudio" value="<?php echo $bandera == true? $row[0]:'' ?>">
     <div class="form-group">
         <label for="txtFechaInicio" class="col-sm-2 control-label">Fecha Inicio</label>
         <div class="col-sm-7">
@@ -56,13 +72,13 @@
     <div class="form-group">
         <label for="txtTitulo" class="col-sm-2 control-label">Titulo</label>
         <div class="col-sm-7">
-            <input id="txtTitulo" name="titulo" class="form-control" type="text" data-type="numeric" data-required="TRUE">
+            <input id="txtTitulo" name="txtTitulo" class="form-control" type="text" data-type="numeric" data-required="TRUE">
         </div>
     </div>
     <div class="form-group">
         <label for="txtCedulaprofesional" class="col-sm-2 control-label">Cedula Profesional</label>
         <div class="col-sm-7">
-            <input id="txtCedulaprofesional" name="txtCedulaprofesional" class="form-control" type="text" data-type="alphanumeric" data-length="200" data-required="TRUE">
+            <input id="txtCedulaprofesional" name="txtCedulaProfesional" class="form-control" type="text" data-type="alphanumeric" data-length="200" data-required="TRUE">
         </div>
     </div>
     <input type="hidden" name="status" id="status">

@@ -55,6 +55,13 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
               $("#mBox").modal('show');
            });
             return;     
+            break;
+            case 'estudiocandidato':
+                    titleMBox = "Editar Estudios del Candidato";
+                    $("#mBoxHeader").html(titleMBox);
+		        	$("#mBoxContainer").load('estudio.php?idestudio='+$(this).attr("data-id"));
+		        	$("#mBox").modal('show');
+                    return;
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla+"&campo="+$(this).attr('data-campo')+"&id="+$(this).attr("data-id"),function(data){
@@ -93,6 +100,9 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
             case 'entrevistadimension':
                  mensaje("2","No puedes eliminar las dimensiones");
             return;
+            break; 
+            case 'estudiocandidato':
+                    servicio = '34';
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla+"&accion=delete&id="+$(this).attr("data-id"),function(data){
@@ -239,7 +249,9 @@ $(".nav.nav-tabs > li").click(function(){
                  });
                  return;
             break;
-                
+            case 'estudiocandidato':
+                  campos= 'idestudio,"Fecha Inicio","Fecha Fin","Carrera","Institucion",grado,"Ciclo Escolar","Titulo","Cedula Profesional",promedio';
+            break;
 		 }
 	sendRequest("POST","lib/consultas/servicio.php",true,"servicio=14&campos="+campos+"&idcandidato=1&tabla="+tabla,function(data){
 		        	$("#"+tabla).html(data).addClass('active').siblings().removeClass('active');
