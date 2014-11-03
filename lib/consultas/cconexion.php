@@ -26,8 +26,8 @@ class conexion
 	 */ 
 	function getData()
 	{
-		include('../conexion.inc.php');	
-		include('../adodb5/adodb.inc.php');
+		include dirname(__FILE__).'/../conexion.inc.php';	
+		include dirname(__FILE__).'/../adodb5/adodb.inc.php';
 		$this->svr= $svr;
 		$this->usr = $usr;
 		$this->pwd = $pwd;

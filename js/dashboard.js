@@ -59,7 +59,9 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
             case 'estudiocandidato':
                     titleMBox = "Editar Estudios del Candidato";
                     $("#mBoxHeader").html(titleMBox);
-		        	$("#mBoxContainer").load('estudio.php?idestudio='+$(this).attr("data-id"));
+		        	sendRequest("POST","estudio.php",true,"idestudio="+$(this).attr("data-id"),function(data){
+                        $("#mBoxContainer").html(data);
+                    });
 		        	$("#mBox").modal('show');
                     return;
             break;     
@@ -142,8 +144,17 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
             break; 
             case 'estudiocandidato':
                  titleMBox = "Estudios del Candidato";
-                 servicio = "33";
-                 tabla = "estudio";
+                 titleMBox = "Editar Estudios del Candidato";
+                    $("#mBoxHeader").html(titleMBox);
+		        	sendRequest("POST","estudio.php",true,"",function(data){
+                        $("#mBoxContainer").html(data);
+                        var script = document.createElement('script');
+                        script.type = 'text/javascript';
+                         script.src = "js/estudio.js";                                 
+                        $("body").append(script);  
+                    });
+		        	$("#mBox").modal('show');
+                    return;
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla,function(data){
@@ -159,12 +170,6 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
 					 	case "candidatoareainteres":
 					 		
 					 	break;
-                        case "estudio":
-                              var script = document.createElement('script');
-                                script.type = 'text/javascript';
-                                 script.src = "js/estudio.js";                                 
-                                $("body").append(script);  
-                         break;
 					 }
 		        });
 	}
@@ -294,6 +299,9 @@ $("body").delegate("#btnAgregarDimensionEntrevista","click",function(){
                 $("#frmEntrevista > fieldset").attr("disabled",true);
                 return;
             }
+});
+$("#btnModificarEntrevista").click(function(){
+    $("fieldset").attr("disabled",false);
 });
 /*    $('body').onunload=function(e)
     {

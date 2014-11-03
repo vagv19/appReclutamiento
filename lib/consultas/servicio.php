@@ -697,17 +697,18 @@ where idempleado = $idempleado";
                 echo $file;
             break;
             case '34':
+                $chkTitulo = isset($chkTitulo)==true?$chkTitulo:'0';
                 switch($accion)
                 {
                     case 'insert':
                         $idestudio = '(select coalesce(max(idestudio)+1,1) from estudio)';
-                        $sql = "insert into estudio values($idestudio,'$txtFechaInicio','$txtFechaFin',$txtGrado,$cmbCicloEscolar,$cmbCarrera,$cmbInstitucion,'$txtTitulo','$txtCedulaProfesional',1,1,$txtPromedio);";
+                        $sql = "insert into estudio values($idestudio,'$txtFechaInicio','$txtFechaFin',$txtGrado,$cmbCicloEscolar,$cmbCarrera,$cmbInstitucion,'$chkTitulo','$txtCedulaProfesional',1,1,$txtPromedio);";
                     break;
                     case 'delete':
-                        $sql = "update estudio set status =0 where idestudio = $idestudio";
+                        $sql = "update estudio set status =0 where idestudio = $id";
                     break;
                     case 'update':
-                            $sql = "update estudio set fechainicio='$txtFechaInicio',fechafin='$txtFechaFin',grado=$txtGrado,idcicloescolar=$cmbCicloEscolar,idcarrera=$cmbCarrera,idinstitucion=$cmbInstitucion,titulo=$txtTitulo,cedulaprofesional='$txtCedulaProfesional',promedio=$txtPromedio where idestudio=$idestudio";
+                            $sql = "update estudio set fechainicio='$txtFechaInicio',fechafin='$txtFechaFin',grado=$txtGrado,idcicloescolar=$cmbCicloEscolar,idcarrera=$cmbCarrera,idinstitucion=$cmbInstitucion,titulo=$chkTitulo,cedulaprofesional='$txtCedulaProfesional',promedio=$txtPromedio where idestudio=$idestudio";
                     break;
                 }
             execQuery($sql);

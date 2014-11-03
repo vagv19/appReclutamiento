@@ -57,6 +57,7 @@
   <div class="tab-pane" id="cursocandidato">...</div>
   <div class="tab-pane" id="entrevistacandidato">
     <form id="frmEntrevista" class="form-horizontal" role="form" style="margin-top:5px;">
+            <button id="btnModificarEntrevista" type="button" class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i></button>
         <fieldset disabled>
             <input type="hidden" id="idEntrevista" name='idEntrevista' value="0" />
             <div class="form-group">
@@ -92,6 +93,7 @@
                 </div>
             </div>
             <div class="col-sm-9">
+                <button id="btnCancelarEntrevista" type="button" class="btn btn-default pull-right">Cancelar <i class="glyphicon glyphicon-cancel"></i></button>
                 <button type="button" class="btn btn-default pull-right" id="btnGuardarEntrevista">Guardar <i class="glyphicon glyphicon-floppy-disk"></i></button>
             </div>
         </fieldset>     
