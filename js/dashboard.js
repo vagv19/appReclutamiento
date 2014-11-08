@@ -14,6 +14,7 @@ $(document).ready(function(){
         $("#cmbResultado").html(data);
     });
 });
+/**clic en los botones de insertar,modificar y eliminar de las tablas */
 $("body").delegate("tr > td > .btn-group > button","click",function(){
 	var servicio="";
 	var titleMBox ="";
@@ -61,9 +62,23 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
                     $("#mBoxHeader").html(titleMBox);
 		        	sendRequest("POST","estudio.php",true,"idestudio="+$(this).attr("data-id"),function(data){
                         $("#mBoxContainer").html(data);
+                        var script = document.createElement('script');
+                        script.type = 'text/javascript';
+                         script.src = "js/estudio.js";
+                         script.id = "scrEstudio";
+                        $("body").append(script); 
                     });
 		        	$("#mBox").modal('show');
                     return;
+            break;
+            case 'estudiosocioecfamiliarcandidato':
+                titleMBox = "Editar Estudio Socio Economico Familiar";
+                 $("#mBoxHeader").html(titleMBox);
+                 sendRequest("POST","estudiosocioecfamiliar.php",true,"idestudiosocioecfamiliar="+$(this).attr('data-id'),function(data){
+                    $("#mBoxContainer").html(data);
+                 });
+                 $("#mBox").modal('show');
+                 return;
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla+"&campo="+$(this).attr('data-campo')+"&id="+$(this).attr("data-id"),function(data){
@@ -105,6 +120,9 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
             break; 
             case 'estudiocandidato':
                     servicio = '34';
+            break;
+            case 'estudiosocioecfamiliarcandidato':
+                servicio = '41';     
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla+"&accion=delete&id="+$(this).attr("data-id"),function(data){
@@ -144,17 +162,26 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
             break; 
             case 'estudiocandidato':
                  titleMBox = "Estudios del Candidato";
-                 titleMBox = "Editar Estudios del Candidato";
                     $("#mBoxHeader").html(titleMBox);
 		        	sendRequest("POST","estudio.php",true,"",function(data){
                         $("#mBoxContainer").html(data);
                         var script = document.createElement('script');
                         script.type = 'text/javascript';
-                         script.src = "js/estudio.js";                                 
+                         script.src = "js/estudio.js";
+                         script.id = "scrEstudio";
                         $("body").append(script);  
                     });
 		        	$("#mBox").modal('show');
                     return;
+            break;
+            case 'estudiosocioecfamiliarcandidato':
+                 titleMBox = "Estudio Socio Economico Familiar del Candidato";
+                 $("#mBoxHeader").html(titleMBox);
+                 sendRequest("POST","estudiosocioecfamiliar.php",true,"",function(data){
+                    $("#mBoxContainer").html(data);
+                 });
+                 $("#mBox").modal('show');
+                 return;
             break;     
 		 }
 		sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla,function(data){
@@ -175,6 +202,7 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
 	}
 	/**/
 });
+/*boton guardar*/
 $("body").delegate("#btnGuardarModal","click",function(){
 	var servicio =0;
 	var tabla = $('.nav.nav-tabs > li.active').children().attr("href").replace("#","");
@@ -199,9 +227,10 @@ $("body").delegate("#btnGuardarModal","click",function(){
             case "estudiocandidato":
                  servicio = "34";
                  tabla = "estudio";
-                                          
-                 //alert($("#frmestudio").serialize()+"&accion="+accion);
-                 //return;//temporal remover
+            break;
+            case "estudiosocioecfamiliarcandidato":
+                 servicio = "41";
+                 tabla = "estudiosocioecfamiliar";
             break;     
 		 }
 		 sendRequest("POST","lib/consultas/servicio.php",true,"servicio="+servicio+"&tabla="+tabla+"&"+$("#frm"+tabla).serialize()+"&accion="+accion,function(data){
@@ -215,6 +244,7 @@ $("body").delegate("#btnGuardarModal","click",function(){
 					}
 		        });
 });
+/* *clic a las tabs* */
 $(".nav.nav-tabs > li").click(function(){
 	var tabla = $(this).children().attr("href").replace("#","");
 	var campos="";
@@ -234,38 +264,41 @@ $(".nav.nav-tabs > li").click(function(){
 		 	break;
             case "entrevistacandidato":
                  $('#txtFecha').datepicker({format: 'yyyy-mm-dd'});
-                 sendRequest("POST","lib/consultas/servicio.php",false,"servicio=31",function(data){
-                    if( data == "0")
-                    {
-                        $("#frmEntrevista > fieldset").attr("disabled",false);   
-                    }
-                     else{
-                         var request = ($.parseJSON(data))[0]; 
-                     $("#idEntrevista").val(request.identrevista);
-                     $("#txtFecha").val(request.fecha);
-                     $("#cmbPresentacion").val(request.idpresentacion);
-                     $("#txtLogros").val(request.logros);
-                     $("#txtObservaciones").val(request.observaciones);
-                     $("#cmbTipoEntrevista").val(request.idtipoentrevista);
-                     sendRequest("POST","lib/consultas/servicio.php",true,"servicio=32&identrevista="+request.identrevista,function(data){
-                        $("#divDimension").html(data); 
-                     });
-                     }
-                 });
+                 traerEntrevista();
                  return;
             break;
             case 'estudiocandidato':
                   campos= 'idestudio,"Fecha Inicio","Fecha Fin","Carrera","Institucion",grado,"Ciclo Escolar","Titulo","Cedula Profesional",promedio';
+            break;
+            case 'estudiosocioecfamiliarcandidato':
+                 campos = 'idestudiosocioecfamiliar,fecha, "Estructura Familiar","Organizacion Familiar","Salud","Alimentacion","Situacion Economica","Vivienda","Religion","Observaciones","Resultado","Entrevistado por"';
+            break;
+            case 'procesopracticascandidato':
+                sendRequest("POST","lib/consultas/servicio.php",true,"servicio=42",function(data){
+                    if(data != "0")
+                    {
+                        var response = $.parseJSON(data);
+                    $("#spFechaAsignacionPractica").html(response[0].fechaasignacion);
+                    $("#spNumeroAsignacionPractica").html(response[0].numeroasignacion);
+                    $("#spDepartamentoAsignacionPractica").html(response[0].descripcion);
+                    $("#spEncargadoAsignacionPractica").html(response[0].nombre);
+                    $("#spFechaInicioAsignacionPractica").html(response[0].fechainicio);
+                    $("#spFechaTerminoAsignacionPractica").html(response[0].fechafin);
+                    $("#spFechaVencimientoSeguro").html(response[0].fechaterminopoliza);
+                    }
+                }); 
+                return;
             break;
 		 }
 	sendRequest("POST","lib/consultas/servicio.php",true,"servicio=14&campos="+campos+"&idcandidato=1&tabla="+tabla,function(data){
 		        	$("#"+tabla).html(data).addClass('active').siblings().removeClass('active');
 		        });
 });
+//Entrevista candidato, guardar,modificar y cancelar entrevista y dimensiones
 $("#btnGuardarEntrevista").click(function() {
-    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=27&"+$("form").serialize(),function(data){
+    sendRequest("POST","lib/consultas/servicio.php",false,"servicio=27&"+$("form").serialize()+"&accion="+$(this).attr("data-accion"),function(data){
        var response = $.parseJSON(data);
-       if(response.codigo == "1")
+       if(response.codigo == "1" && $('#btnGuardarEntrevista').attr("data-accion") == 'insert')
        {
            $("#mBoxHeader").text('Habilidades');
            sendRequest("POST","lib/consultas/servicio.php",true,"servicio=28&identrevista="+response.id,function(data){
@@ -274,7 +307,13 @@ $("#btnGuardarEntrevista").click(function() {
               $("#mBox").modal('show');
            });
        }
+       else if(response.codigo == '1' && $('#btnGuardarEntrevista').attr("data-accion") == 'update')
+       {
+           mensaje(response.codigo,response.mensaje);
+           $("fieldset").attr("disabled",true);
+       }
     });
+    $(this).attr("data-accion","insert");
 });
 $("body").delegate("#btnAgregarDimensionEntrevista","click",function(){
     sendRequest("POST","lib/consultas/servicio.php",true,"servicio=29&"+$("#frmEntrevistaDimension").serialize(),function(data){
@@ -302,13 +341,41 @@ $("body").delegate("#btnAgregarDimensionEntrevista","click",function(){
 });
 $("#btnModificarEntrevista").click(function(){
     $("fieldset").attr("disabled",false);
+    $("#btnGuardarEntrevista").attr("data-accion","update");
 });
-/*    $('body').onunload=function(e)
-    {
-        "use strict";
-        e.preventDefault();
-    if(!(confirm("Realmente deseas salir?")))   
-    {
-       return ;
-    }
-    }*/
+$("#btnCancelarEntrevista").click(function(e){
+    $("frmEntrevista").resetForm();
+    $("fieldset").attr("disabled",false);
+    traerEntrevista();
+});
+$("#btnSubirBolsaPractica").click(function(){
+    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=43&accion=subirbp",function(data){
+        if(data == "1")
+        {
+            $("#divClasificacionCandidato").html("BP");
+            mensaje(response.codigo,response.mensaje);//falta terminar esta parte para que el servicio aun no creado by the way retorne 1 o 0 y el msj
+        }
+    });
+});
+function traerEntrevista()
+{
+    sendRequest("POST","lib/consultas/servicio.php",false,"servicio=31",function(data){
+                    if( data == "0")
+                    {
+                        $("#frmEntrevista > fieldset").attr("disabled",false);   
+                    }
+                     else{
+                     $("#frmEntrevista > fieldset").attr("disabled",true);  
+                     var request = ($.parseJSON(data))[0]; 
+                     $("#idEntrevista").val(request.identrevista);
+                     $("#txtFecha").val(request.fecha);
+                     $("#cmbPresentacion").val(request.idpresentacion);
+                     $("#txtLogros").val(request.logros);
+                     $("#txtObservaciones").val(request.observaciones);
+                     $("#cmbTipoEntrevista").val(request.idtipoentrevista);
+                     sendRequest("POST","lib/consultas/servicio.php",true,"servicio=32&identrevista="+request.identrevista,function(data){
+                        $("#divDimension").html(data); 
+                     });
+                     }
+                 });
+}

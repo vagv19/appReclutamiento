@@ -17,7 +17,7 @@
     }
 ?>
 <form id="frmestudio" class="form-horizontal" role="form">
-    <input type="hidden" name="idestudio" id="idestudio" value="<?php echo $bandera == true? $row[0]:'' ?>">
+    <input type="hidden" name="idestudio" id="idestudio" value="<?php echo $bandera == true? $row[0]:'-1' ?>">
     <div class="form-group">
         <label for="cmbInstitucion" class="col-sm-2 control-label">Institucion</label>
         <div class="col-sm-7">

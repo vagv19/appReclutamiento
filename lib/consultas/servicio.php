@@ -3,6 +3,7 @@ header('Content-language: es');
 	include_once 'cconexion.php';
 	include_once("paginacion.php");
     include_once "HTMLObject.class.php";
+    include_once('sql_generator.class.php');
 	if($_REQUEST)
 	{
 		extract($_REQUEST);
@@ -621,18 +622,27 @@ where idempleado = $idempleado";
 				echo $cnx->crearOption($sql);
 			break;
             case '27':
-                $identrevista = "(select coalesce(max(identrevista)+1,1) from entrevista)";
-                $sql = "insert into entrevista values($identrevista,'$txtFecha','$txtObservaciones',1,0,$cmbPresentacion,1,'$txtLogros',$cmbTipoEntrevista)returning identrevista;";
-                $cnx = new conexion();
-                $r = $cnx->executeNonQuery($sql);
-                if($r)
+                if($accion == 'insert')
                 {
-                    echo '{"codigo":"1","mensaje":"Datos Actualizados correctamente","id":"'.$r.'"}';
+                    $identrevista = "(select coalesce(max(identrevista)+1,1) from entrevista)";
+                    $sql = "insert into entrevista values($identrevista,'$txtFecha','$txtObservaciones',1,0,$cmbPresentacion,1,'$txtLogros',$cmbTipoEntrevista)returning                               identrevista;";
+                    $cnx = new conexion();
+                    $r = $cnx->executeNonQuery($sql);
+                    if($r)
+                    {
+                        echo '{"codigo":"1","mensaje":"Datos Actualizados correctamente","id":"'.$r.'"}';
+                    }
+                    else
+                    {
+                        echo '{"codigo":"2","mensaje":"Hubo un error al tratar de realizar la consulta"}';		
+                    }
                 }
                 else
                 {
-                    echo '{"codigo":"2","mensaje":"Hubo un error al tratar de realizar la consulta"}';		
-                }
+                    $sql = "update entrevista set fecha='$txtFecha',observaciones='$txtObservaciones',idpresentacion=$cmbPresentacion,logros='$txtLogros',idtipoentrevista=$cmbTipoEntrevista where identrevista=$idEntrevista";
+                    execQuery($sql);
+                }                
+                
             break;
             case '28':
                 $cnx = new conexion();
@@ -817,6 +827,31 @@ where idempleado = $idempleado";
                     $sql = "select idinstitucion,descripcion from institucion where descripcion like upper('%$txtBuscarInstitucion%')";
                     $cnx = new conexion();
                     echo $cnx->returnListGroup($sql,"cmbInstitucion");
+            break;
+            case '41':
+                    $sqlGen = new Sqlgen();
+                    $sql = '';
+                    switch($accion)
+                    {
+                        case 'delete':
+                            $sql = 'update estudiosocioecfamiliar set status=0 where idestudiosocioecfamiliar='.$id;
+                        break;
+                        case 'insert':
+                            $idestudiosocioecfamiliar = '(select coalesce(max(idestudiosocioecfamiliar)+1,1) from estudiosocioecfamiliar)';
+                            $data = array('idestudiosocioecfamiliar'=>$idestudiosocioecfamiliar,'fecha'=>$txtFecha,'estructurafamiliar'=>trim($txtEstructuraFamiliar),'organizacionfamiliar'=>trim($txtOrganizacionFamiliar),'salud'=>trim($txtSalud),'alimentacion'=>trim($txtAlimentacion),'situacioneconomica'=>trim($txtSituacionEconomica),'vivienda'=>trim($txtVivienda),'religion'=>trim($txtReligion),'idempleado'=>'0','idcandidato'=>'1','observaciones'=>trim($txtObservaciones),'resultado'=>$cmbResultado);
+                            $sql =  $sqlGen->insert($tabla,$data);
+                        break;
+                        case 'update':
+                            $data = array('fecha'=>$txtFecha,'estructurafamiliar'=>trim($txtEstructuraFamiliar),'organizacionfamiliar'=>trim($txtOrganizacionFamiliar),'salud'=>trim($txtSalud),'alimentacion'=>trim($txtAlimentacion),'situacioneconomica'=>trim($txtSituacionEconomica),'vivienda'=>trim($txtVivienda),'religion'=>trim($txtReligion),'idempleado'=>'0','idcandidato'=>'1','observaciones'=>trim($txtObservaciones),'resultado'=>$cmbResultado);
+                            $sql = $sqlGen->update($tabla,$data,array('idestudiosocioecfamiliar' => $idEstudioSocioEcFamiliar));
+                        break;
+                    }
+                    echo execQuery($sql);
+            break;
+            case '42':
+                $sql = 'select * from viewasignacionpractica where idcandidato=1 and idpractica=(select max(idpractica) from practica where idcandidato=1)';
+                $cnx = new conexion();
+                echo $cnx->returnJSON($sql);
             break;
 			default:                
 				die("No estas autorizado para estar aqui");

@@ -133,3 +133,9 @@ function inicializarPopOver () {
 	$("#popBusqueda").fadeOut(300);
 	$("#divRSBusqueda").html('');
 }
+$("a[data-toggle='tab']").on('show.bs.tab',function(e){
+    if($(e.relatedTarget).attr('href') == "#estudiocandidato")
+    {
+        $("#scrEstudio").remove();
+    }
+});

@@ -6,9 +6,10 @@
 		extract($_REQUEST);
 		$cnx = new conexion();
 		switch ($servicio) {
-			case 'test':
-                $object = new HTMLObject('venta');
+			case 'test':                
+                $object = new HTMLObject($tabla);
 				echo $object->returnHTMLObject();
+               
 			break;
 			case 'login':
 				# login code...
@@ -45,4 +46,8 @@
 			break;
 		}
 	}
+function sendRequest()
+{
+    echo 'se';
+}
 ?>

@@ -1,0 +1,8 @@
+CREATE OR REPLACE VIEW viewasignacionpractica AS 
+ SELECT practica.idpractica, practica.fechainicio, practica.fechafin, encargado.nombre, departamento.descripcion, practica.numeroprorroga, practica.numeroasignacion, practica.fechaasignacion, practica.fechaterminopoliza, practica.idcandidato
+   FROM practica
+   JOIN encargado ON encargado.idencargado = practica.idencargado
+   JOIN departamento ON departamento.iddepartamento = practica.iddepartamento;
+
+ALTER TABLE viewasignacionpractica
+  OWNER TO postgres;

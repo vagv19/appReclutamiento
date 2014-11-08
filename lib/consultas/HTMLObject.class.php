@@ -59,13 +59,17 @@ where table_name = '$table'
 		$objeto = "";
 		$cnx = new conexion();
 		$datarequired=false;
-		$rs = $cnx->returnRS($this->sql);
+		$rs = $cnx->returnRS($this->sql, true);
 		while ($r = $rs->FetchRow()) {
 			if($r["columna"] == "status")
 			{
 				$objeto .= '<input type="hidden" name="status" id="status" />';
 			}
             elseif($r['columna'] == 'idcandidato')
+            {
+                
+            }
+            elseif($r['columna'] == 'idempleado')
             {
                 
             }
@@ -105,6 +109,16 @@ where table_name = '$table'
                     $objeto .= '<div class="col-sm-7">';
 					$objeto .= '<input id="'.$r['columna'].'" name="'.$r['columna'].'" class="form-control"  type="text" data-type="alphanumeric" '.$length.' data-required="'
                     .$datarequired.'" />';	
+                    $objeto .= '</div>';
+                    $objeto .= '</div>';
+				}
+                elseif($r['tipodato'] == 'text')
+				{
+                    $objeto .= '<div class="form-group">';
+					$objeto .= "<label for='".$r['columna']."' class='col-sm-2 control-label'>".$r['columna']."</label>";
+                    $objeto .= '<div class="col-sm-7">';
+					$objeto .= '<textarea id="'.$r['columna'].'" name="'.$r['columna'].'" class="form-control"  type="text" data-type="alphanumeric" '.$length.' data-required="'
+                    .$datarequired.'" ></textarea>';	
                     $objeto .= '</div>';
                     $objeto .= '</div>';
 				}

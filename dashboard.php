@@ -10,7 +10,7 @@
 				<div class="col-sm-5">AH-10001</div>
 				<div class="col-sm-6 pull-right">
 					<div class="col-sm-9" style="text-align:right">Clasificacion:</div>
-					<div class="col-sm-3">Bolsa AHMSA</div>
+					<div id="divClasificacionCandidato" class="col-sm-3">Bolsa AHMSA</div>
 				</div>
 				</div>
 			</h4>
@@ -94,7 +94,7 @@
             </div>
             <div class="col-sm-9">
                 <button id="btnCancelarEntrevista" type="button" class="btn btn-default pull-right">Cancelar <i class="glyphicon glyphicon-cancel"></i></button>
-                <button type="button" class="btn btn-default pull-right" id="btnGuardarEntrevista">Guardar <i class="glyphicon glyphicon-floppy-disk"></i></button>
+                <button type="button" class="btn btn-default pull-right" data-accion="insert" id="btnGuardarEntrevista">Guardar <i class="glyphicon glyphicon-floppy-disk"></i></button>
             </div>
         </fieldset>     
     </form>
@@ -103,7 +103,39 @@
   <div class="tab-pane" id="estudiocandidato">
   </div>
   <div class="tab-pane" id="estudiosocioecfamiliarcandidato">...</div>
-  <div class="tab-pane" id="procesopracticascandidato">...</div>
+  <div class="tab-pane" id="procesopracticascandidato">
+    <div class="col-sm-8" style="margin-top:5px;">
+        <div class="list-group">
+            <a href="#" class="list-group-item">
+                Asignacion de Practicas&nbsp;&nbsp;<span id="spFechaAsignacionPractica" class="badge"></span>
+            </a>
+            <a href="#" class="list-group-item">
+                Numero de Asignacion <span id="spNumeroAsignacionPractica" class="badge"></span>
+            </a>
+            <a href="#" class="list-group-item">
+                Departamento <span id="spDepartamentoAsignacionPractica" class="badge"></span>
+            </a>
+            <a href="#" class="list-group-item">
+                Encargado <span id="spEncargadoAsignacionPractica" class="badge"></span>
+            </a>
+            <a href="#" class="list-group-item">
+                Inicio de Practicas <span id="spFechaInicioAsignacionPractica" class="badge"></span>
+            </a>
+            <a href="#" class="list-group-item">
+                Termino de Practicas <span id="spFechaTerminoAsignacionPractica" class="badge"></span>
+            </a>
+            <a href="#" class="list-group-item">
+                Vencimiento de Seguro <span id="spFechaVencimientoSeguro" class="badge"></span>
+            </a>
+        </div>
+        
+    </div>      
+    <div class="btn-group-vertical col-sm-4" style="margin-top:5px;">
+        <button id="btnSubirBolsaPractica" type="button" class="btn btn-default">Subir a Bolsa de Practicas <i class="glyphicon glyphicon-upload"></i>         </button>    
+        <button id="btnAsignarPracticante" type="button" class="btn btn-default">Asignar Practicante</button>  
+        <button id="btnCalificarPracticante" type="button" class="btn btn-default">Calificar Practicante</button>
+    </div>    
+  </div>
   <div class="tab-pane" id="idiomacandidato">...</div>
 </div>
 	</div>
