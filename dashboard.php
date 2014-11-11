@@ -131,10 +131,13 @@
         
     </div>      
     <div class="btn-group-vertical col-sm-4" style="margin-top:5px;">
-        <button id="btnSubirBolsaPractica" type="button" class="btn btn-default">Subir a Bolsa de Practicas <i class="glyphicon glyphicon-upload"></i>         </button>    
+        <button id="btnSubirBolsaPractica" type="button" class="btn btn-default"><span class="pull-left">Subir a Bolsa de Practicas</span><i class="glyphicon glyphicon-upload pull-right"></i>         </button>    
         <button id="btnAsignarPracticante" type="button" class="btn btn-default">Asignar Practicante</button>  
         <button id="btnCalificarPracticante" type="button" class="btn btn-default">Calificar Practicante</button>
-    </div>    
+    </div> 
+    <div class="btn-group-vertical col-sm-4" style="margin-top:5px;">
+      <button id="btnSolicitudPendiente" type="button" class="btn btn-danger">Solicitud de practicas Pendiente <i class="glyphicon glyphicon-bell pull-right"></i></button>
+    </div>  
   </div>
   <div class="tab-pane" id="idiomacandidato">...</div>
 </div>

@@ -347,6 +347,7 @@ $("#btnCancelarEntrevista").click(function(e){
     $("frmEntrevista").resetForm();
     $("fieldset").attr("disabled",false);
     traerEntrevista();
+    
 });
 $("#btnSubirBolsaPractica").click(function(){
     sendRequest("POST","lib/consultas/servicio.php",true,"servicio=43&accion=subirbp",function(data){
