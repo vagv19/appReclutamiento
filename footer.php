@@ -66,7 +66,7 @@
 	<script src="js/ui/jquery.ui.autocomplete.min.js"></script>
 	<script src="js/ui/jquery.ui.effect.min.js"></script>
 	<script src="js/ui/jquery.ui.effect-slide.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
     <script src="js/datepicker/bootstrap-datepicker.js"></script>
     <script src="js/datepicker/locales/bootstrap-datepicker.es.js" charset="UTF-8"></script>
     <script type="text/javascript" src="js/jsfuncionesGenericas.js"></script>

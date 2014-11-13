@@ -12,7 +12,12 @@ body {
 		}
 .chartContainer{
 	min-height:300px;
-}		
+}
+.left-dropdown{
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+    border-right:0px;
+}
 .btndefault{
 	border:1px solid #999999;
 	background-color: #ffffff;

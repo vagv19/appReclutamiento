@@ -51,9 +51,11 @@ session_start();
           <a class="navbar-brand" href="#">Sistema de Administracion de Talento</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="induccion.php">Salir</a></li>
-          </ul>
+            <ul class="nav navbar-nav navbar-right" style="font-size:16px">
+                <li><a href="#"><i class="glyphicon glyphicon-comment"></i></a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
+                <li><a href="induccion.php"><i class="glyphicon glyphicon-log-out"></i></a></li>
+            </ul>
         </div>
       </div>
     </div>

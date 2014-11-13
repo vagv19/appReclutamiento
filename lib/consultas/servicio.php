@@ -849,9 +849,29 @@ where idempleado = $idempleado";
                     echo execQuery($sql);
             break;
             case '42':
-                $sql = 'select * from viewasignacionpractica where idcandidato=1 and idpractica=(select max(idpractica) from practica where idcandidato=1)';
+                $sql = 'select * from viewasignacionpractica where idcandidato='.$idcandidato.' and idpractica=(select max(idpractica) from practica where idcandidato='.$idcandidato.')';
                 $cnx = new conexion();
                 echo $cnx->returnJSON($sql);
+            break;
+            case '43':
+                switch($accion)
+                {
+                    case 'asignarpracticante':
+                        #codigo de asignacion
+                    break;
+                    case 'calificarpracticante':
+                        #codigo calificacion
+                    break;
+                    case 'subirbp':
+                        $sql = "update candidato set idclasificacion = 22 where idcandidato = $idcandidato";
+                        execQuery($sql);
+                    break;
+                    case 'versolicitudpendiente':
+                        $sql= "select * from solicitudpendiente where idcandidato = $idcandidato";
+                        $cnx = new conexion();
+                        echo $cnx->returnJSON($sql);
+                    break;
+                }
             break;
 			default:                
 				die("No estas autorizado para estar aqui");

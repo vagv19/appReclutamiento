@@ -1,21 +1,12 @@
 var accion ="update";
 $(document).ready(function(){
     $(".nav.nav-tabs > li.active").click();
-    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=26&campos=idpresentacion as id,descripcion&tabla=presentacion",function(data) {
-        $("#cmbPresentacion").html(data);
-    });
-    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=26&campos=idtipoentrevista as id,descripcion&tabla=tipoentrevista",function(data) {
-        $("#cmbTipoEntrevista").html(data);
-        sendRequest("POST","lib/consultas/servicio.php",true,"servicio=26&campos=id,descripcion&tabla=viewtipoentrevistadimension&campowhere=idtipoentrevista&valorwhere=1",function(data) {
-            $("#cmbDimension").html(data);
-        });
-    });
-    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=26&campos=idresultado as id,resultado as descripcion&tabla=resultado",function(data) {
-        $("#cmbResultado").html(data);
-    });
+   
+   
 });
 /**clic en los botones de insertar,modificar y eliminar de las tablas */
 $("body").delegate("tr > td > .btn-group > button","click",function(){
+    $("#mBox").modal('mostrarGuardar');
 	var servicio="";
 	var titleMBox ="";
 	var tabla="";
@@ -48,9 +39,11 @@ $("body").delegate("tr > td > .btn-group > button","click",function(){
                  titleMBox = "Entrevista";
                  servicio = "25";
                  tabla = "entrevista";
+                 $("#mBox").modal('ocultarGuardar');
             break;
             case 'entrevistadimension':
                 titleMBox = "Editar Dimension";
+                 $("#mBox").modal('ocultarGuardar');
                  sendRequest("POST","lib/consultas/servicio.php",true,"servicio=28&identrevista="+$("#idEntrevista").val(),function(data){
               $("#mBoxContainer").html(data);
               $("#mBox").modal('show');
@@ -264,7 +257,19 @@ $(".nav.nav-tabs > li").click(function(){
 		 	break;
             case "entrevistacandidato":
                  $('#txtFecha').datepicker({format: 'yyyy-mm-dd'});
-                 traerEntrevista();
+                 sendRequest("POST","lib/consultas/servicio.php",false,"servicio=26&campos=idpresentacion as id,descripcion&tabla=presentacion",function(data) {
+        $("#cmbPresentacion").html(data);
+    });
+                    sendRequest("POST","lib/consultas/servicio.php",false,"servicio=26&campos=idtipoentrevista as id,descripcion&tabla=tipoentrevista",function(data) {
+                        $("#cmbTipoEntrevista").html(data);
+                        sendRequest("POST","lib/consultas/servicio.php",false,"servicio=26&campos=id,descripcion&tabla=viewtipoentrevistadimension&campowhere=idtipoentrevista&valorwhere=1",function(data) {
+                            $("#cmbDimension").html(data);
+                        });
+                    });
+                    sendRequest("POST","lib/consultas/servicio.php",false,"servicio=26&campos=idresultado as id,resultado as descripcion&tabla=resultado",function(data) {
+                        $("#cmbResultado").html(data);
+                         });
+                 traerEntrevista();                  
                  return;
             break;
             case 'estudiocandidato':
@@ -274,7 +279,7 @@ $(".nav.nav-tabs > li").click(function(){
                  campos = 'idestudiosocioecfamiliar,fecha, "Estructura Familiar","Organizacion Familiar","Salud","Alimentacion","Situacion Economica","Vivienda","Religion","Observaciones","Resultado","Entrevistado por"';
             break;
             case 'procesopracticascandidato':
-                sendRequest("POST","lib/consultas/servicio.php",true,"servicio=42",function(data){
+                sendRequest("POST","lib/consultas/servicio.php",true,"servicio=42&idcandidato=1",function(data){
                     if(data != "0")
                     {
                         var response = $.parseJSON(data);
@@ -350,12 +355,21 @@ $("#btnCancelarEntrevista").click(function(e){
     
 });
 $("#btnSubirBolsaPractica").click(function(){
-    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=43&accion=subirbp",function(data){
-        if(data == "1")
+    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=43&accion=subirbp&idcandidato=1",function(data){
+        if(data !== "0")
         {
+            var response = $.parseJSON(data);
             $("#divClasificacionCandidato").html("BP");
-            mensaje(response.codigo,response.mensaje);//falta terminar esta parte para que el servicio aun no creado by the way retorne 1 o 0 y el msj
+            mensaje(response.codigo,response.mensaje);
         }
+    });
+});
+$("#btnSolicitudPendiente").click(function(){
+    var $modal = $("#mBox");
+    sendRequest("POST","solicitudpendiente.php",true,"idcandidato=1",function(data){
+       $modal.modal('ocultarGuardar');
+        $("#mBoxContainer").html(data);
+       $modal.modal('show');
     });
 });
 function traerEntrevista()
@@ -374,7 +388,7 @@ function traerEntrevista()
                      $("#txtLogros").val(request.logros);
                      $("#txtObservaciones").val(request.observaciones);
                      $("#cmbTipoEntrevista").val(request.idtipoentrevista);
-                     sendRequest("POST","lib/consultas/servicio.php",true,"servicio=32&identrevista="+request.identrevista,function(data){
+                     sendRequest("POST","lib/consultas/servicio.php",false,"servicio=32&identrevista="+request.identrevista,function(data){
                         $("#divDimension").html(data); 
                      });
                      }

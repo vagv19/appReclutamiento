@@ -1,6 +1,49 @@
 <?php
 	include_once 'header.php';
 ?>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        	<nav class="navbar navbar-default" style="border:none;background-color:white;" role="navigation">
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse navbar-ex1-collapse">
+								<div class="navbar-form navbar-right">
+									<div class="form-group">
+										<div class="input-group">
+											 <span class="input-group-addon">Buscar</span>
+									      <input type="text" id="txtBuscar" class="form-control">
+									      <span class="input-group-btn">
+									        <!-- button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button-->
+									        <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle left-dropdown" data-toggle="dropdown" aria-expanded="false">Por <span class="caret"></span>
+                                                </button>
+                                                      <ul class="dropdown-menu" role="menu">
+                                                        <li class="active"><a href="#">Folio</a></li>
+                                                        <li><a href="#">Nombre</a></li>
+                                                      </ul>
+											  <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+											  <!--button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											    <span class="caret"></span>
+											    <span class="sr-only">Ver Opciones</span>
+											  </button>
+											  <ul id="cmbBarraBusqueda" class="dropdown-menu" role="menu">
+											    
+											  </ul-->
+										      </span>
+										  </div>
+									    </div>
+											<div id="popBusqueda" class="popover bottom" style="max-width:522px;width:450px;">
+											<div class="arrow"></div>
+											<h3 class="popover-title">Resultado de la Busqueda</h3>
+											<div id="divRSBusqueda" class="popover-content">
+											</div>
+										</div><!---popoverbusqueda-->
+									</div>
+									
+									
+								</div>
+								
+							</div><!-- /.navbar-collapse -->
+						</nav>	
+         </div>
 <div class="col-sm-10 col-sm-offset-2 main" id="contenedor">
 	<div class="list-group">
 		<a href="#" class="list-group-item">
@@ -132,11 +175,11 @@
     </div>      
     <div class="btn-group-vertical col-sm-4" style="margin-top:5px;">
         <button id="btnSubirBolsaPractica" type="button" class="btn btn-default"><span class="pull-left">Subir a Bolsa de Practicas</span><i class="glyphicon glyphicon-upload pull-right"></i>         </button>    
-        <button id="btnAsignarPracticante" type="button" class="btn btn-default">Asignar Practicante</button>  
-        <button id="btnCalificarPracticante" type="button" class="btn btn-default">Calificar Practicante</button>
+        <button id="btnAsignarPracticante" type="button" class="btn btn-default"><span class="pull-left">Asignar Practicante</span><i class="glyphicon glyphicon-plus-sign pull-right"></i></button>  
+        <button id="btnCalificarPracticante" type="button" class="btn btn-default"><span class="pull-left">Calificar Practicante</span><i class="glyphicon glyphicon-ok-sign pull-right"></i></button>
     </div> 
     <div class="btn-group-vertical col-sm-4" style="margin-top:5px;">
-      <button id="btnSolicitudPendiente" type="button" class="btn btn-danger">Solicitud de practicas Pendiente <i class="glyphicon glyphicon-bell pull-right"></i></button>
+        <button id="btnSolicitudPendiente" type="button" class="btn btn-danger"><span class="pull-left">Solicitud de practicas Pendiente</span> <i class="glyphicon glyphicon-bell pull-right"></i></button>
     </div>  
   </div>
   <div class="tab-pane" id="idiomacandidato">...</div>

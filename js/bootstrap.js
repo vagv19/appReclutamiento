@@ -941,7 +941,14 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
         .emulateTransitionEnd(300) :
       this.hideModal()
   }
-
+  /**yo***/
+  Modal.prototype.ocultarGuardar = function () {
+          $("#btnGuardarModal").fadeOut(40);
+  }
+  Modal.prototype.mostrarGuardar = function () {
+      $("#btnGuardarModal").fadeIn(40);
+  }
+  /**yo***/
   Modal.prototype.enforceFocus = function () {
     $(document)
       .off('focusin.bs.modal') // guard against infinite focus loop

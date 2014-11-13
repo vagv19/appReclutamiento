@@ -83,7 +83,7 @@ where table_name = '$table'
 				$objeto .= "<label for='".$r['columna']."' class='col-sm-2 control-label'>".str_replace("id",'',$r['columna'])."</label>";
 				$objeto .= '<div class="col-sm-7">';
                 $objeto .= '<select name="'.$r["columna"].'" id="'.$r["columna"].'" class="form-control" >';
-				$objeto .= $cnx->crearOption('select '.$r["columna"].' as id,descripcion from '.$r['foreigntable'],'-1');
+				//$objeto .= $cnx->crearOption('select '.$r["columna"].' as id,'.($r['columna'] == 'idencargado'?'nombre as ':'').'descripcion from '.$r['foreigntable'],'-1');
                 $objeto .= '</select>';
                 $objeto .= '</div>';
                 $objeto .= '</div>';
