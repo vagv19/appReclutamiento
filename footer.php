@@ -1,7 +1,8 @@
  </div>
       </div>
     </div>
-    <div id="msjError" style="position:absolute;">algo</div>
+    <div id="msjError" class="alert alert-info" style="position: absolute;top: 90%;left: 20px;display: none;z-index: 10000;width: 200px;">algo <span class="close" style="    position: absolute;top: 0px;left: 179px;">×</span>
+</div>
     <!-- modal -->
 	<div class="modal fade" id="mBox" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">

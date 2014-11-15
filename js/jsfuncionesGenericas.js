@@ -3,19 +3,16 @@ function mensaje(opcion,msj)
 	switch(opcion)
 	{
 		case "1": 
-			$("#mBoxAlertTitle").html('Operacion realizada con exito <i class="glyphicon glyphicon-ok-circle"></i>');
-			$("#mBoxAlertBody").html(msj);
+			$("#msjError").html(msj);
 		break;
 		case "2": 
-			$("#mBoxAlertTitle").html('Operacion realizada con errores <i class="glyphicon glyphicon-remove-circle"></i>');
-			$("#mBoxAlertBody").html(msj);
+			$("#msjError").html(msj);
 		break;
 		case "3":
-			$("#mBoxAlertTitle").html('Al parecer ocurrio algo fuera de lo esperado <i class="glyphicon glyphicon-warning-sign"></i>');
-			$("#mBoxAlertBody").html(msj);
+			$("#msjError").html(msj);
 		break;
 	}
-	$("#mBoxAlert").modal('show');
+	$("#msjError").fadeIn(40).delay(2000).fadeOut(40);
 }
 function sendRequest(type,url,async,data,funcion)
 {

@@ -174,12 +174,13 @@
         
     </div>      
     <div class="btn-group-vertical col-sm-4" style="margin-top:5px;">
-        <button id="btnSubirBolsaPractica" type="button" class="btn btn-default"><span class="pull-left">Subir a Bolsa de Practicas</span><i class="glyphicon glyphicon-upload pull-right"></i>         </button>    
-        <button id="btnAsignarPracticante" type="button" class="btn btn-default"><span class="pull-left">Asignar Practicante</span><i class="glyphicon glyphicon-plus-sign pull-right"></i></button>  
-        <button id="btnCalificarPracticante" type="button" class="btn btn-default"><span class="pull-left">Calificar Practicante</span><i class="glyphicon glyphicon-ok-sign pull-right"></i></button>
+        <button id="btnSubirBolsaPractica" data-idcandidato="0" type="button" class="btn btn-default"><span class="pull-left">Subir a Bolsa de Practicas</span><i class="glyphicon glyphicon-upload pull-right"></i>         </button>    
+        <button id="btnAsignarPracticante" data-idcandidato="0" type="button" class="btn btn-default"><span class="pull-left">Asignar Practicante</span><i class="glyphicon glyphicon-plus-sign pull-right"></i></button>  
+        <button id="btnProrrogarPracticante" data-idcandidato="0" type="button" class="btn btn-default"><span class="pull-left">Prorrogar Contrato Practicas</span><i class="glyphicon glyphicon-resize-horizontal pull-right"></i></button>  
+        <button id="btnCalificarPracticante" data-idcandidato="0" type="button" class="btn btn-default"><span class="pull-left">Calificar Practicante</span><i class="glyphicon glyphicon-ok-sign pull-right"></i></button>
     </div> 
     <div class="btn-group-vertical col-sm-4" style="margin-top:5px;">
-        <button id="btnSolicitudPendiente" type="button" class="btn btn-danger"><span class="pull-left">Solicitud de practicas Pendiente</span> <i class="glyphicon glyphicon-bell pull-right"></i></button>
+        <button id="btnSolicitudPendiente" data-idcandidato="0" type="button" class="btn btn-danger"><span class="pull-left">Solicitud de practicas Pendiente</span> <i class="glyphicon glyphicon-bell pull-right"></i></button>
     </div>  
   </div>
   <div class="tab-pane" id="idiomacandidato">...</div>

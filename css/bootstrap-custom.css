@@ -18,6 +18,18 @@ body {
     border-bottom-right-radius:0px;
     border-right:0px;
 }
+.badge-message{
+    font-size: 10px;
+    border-radius: 13px;
+    background-color: #F00C0C;
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 7px;
+    left: 26px;
+    height: 18px;
+    vertical-align: middle;
+}
 .btndefault{
 	border:1px solid #999999;
 	background-color: #ffffff;

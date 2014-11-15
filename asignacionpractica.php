@@ -1,105 +1,78 @@
 <?php 
+    if($_REQUEST)
+    {
+        #terminar para traer el promedio el encargado y el departamento
+        extract($_REQUEST);
+         include_once dirname(__FILE__).("/lib/consultas/cconexion.php");
+        $cnx = new conexion();
+        $sql = "";
+    }
+else
+    die("No estas Autorizado para estar aqui");
 ?>
-<form>
+<form class="form-horizontal" role="form">
     <fieldset>
         <input type="hidden" name="idpractica" id="idpractica" />
         <div class="form-group">
-            <label for='fechainicio' class='col-sm-2 control-label'>fechainicio</label>
+            <label for='txtFechaInicio' class='col-sm-2 control-label'>Fecha Inicio</label>
             <div class="col-sm-7">
-                <input id="fechainicio" name="fechainicio" class="form-control"  type="text" data-type="date"  data-required="TRUE" />
+                <input id="txtFechaInicio" name="txtFechaInicio" class="form-control"  type="text" data-type="date"  data-required="TRUE" />
             </div>
         </div>
         <div class="form-group">
-            <label for='fechafin' class='col-sm-2 control-label'>fechafin</label>
+            <label for='txtFechaFin' class='col-sm-2 control-label'>Fecha Fin</label>
             <div class="col-sm-7">
-                <input id="fechafin" name="fechafin" class="form-control"  type="text" data-type="date"  data-required="TRUE" />
+                <input id="txtFechaFin" name="txtFechaFin" class="form-control"  type="text" data-type="date"  data-required="TRUE" />
             </div>
         </div>
         <div class="form-group">
-            <label for='numeroficha' class='col-sm-2 control-label'>numeroficha</label>
+            <label for='txtNumeroFicha' class='col-sm-2 control-label'>Numero Ficha</label>
             <div class="col-sm-7">
-                <input id="numeroficha" name="numeroficha" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for='montoayuda' class='col-sm-2 control-label'>montoayuda</label>
-            <div class="col-sm-7">
-                <input id="montoayuda" name="montoayuda" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
+                <input id="txtNumeroFicha" name="txtNumeroFicha" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
             </div>
         </div>
         <div class="form-group">
-            <label for='prorroga' class='col-sm-2 control-label'>prorroga</label>
+            <label for='txtMontoAyuda' class='col-sm-2 control-label'>Monto Ayuda</label>
             <div class="col-sm-7">
-                <input id="prorroga" name="prorroga" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
+                <input id="txtMontoAyuda" name="txtMontoAyuda" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
             </div>
         </div>
         <div class="form-group">
-            <label for='numeroprorroga' class='col-sm-2 control-label'>numeroprorroga</label>
+            <label for='txtPromedio' class='col-sm-2 control-label'>Promedio</label>
             <div class="col-sm-7">
-                <input id="numeroprorroga" name="numeroprorroga" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
+                <input id="txtPromedio" name="txtPromedio" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
             </div>
         </div>
         <div class="form-group">
-            <label for='promedio' class='col-sm-2 control-label'>promedio</label>
+            <label for='cmbEncargado' class='col-sm-2 control-label'>Encargado del Practicante</label>
             <div class="col-sm-7">
-                <input id="promedio" name="promedio" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for='totalhoras' class='col-sm-2 control-label'>totalhoras</label>
-            <div class="col-sm-7">
-                <input id="totalhoras" name="totalhoras" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for='resultado' class='col-sm-2 control-label'>resultado</label>
-            <div class="col-sm-7">
-                <input id="resultado" name="resultado" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for='idencargado' class='col-sm-2 control-label'>encargado</label>
-            <div class="col-sm-7">
-                <select name="idencargado" id="idencargado" class="form-control" >
+                <select name="cmbEncargado" id="cmbEncargado" class="form-control" >
+                    <?php #añadir crearOption  ?>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label for='idtipoestadia' class='col-sm-2 control-label'>tipoestadia</label>
+            <label for='cmbTipoEstadia' class='col-sm-2 control-label'>Tipo Estadia</label>
             <div class="col-sm-7">
-                <select name="idtipoestadia" id="idtipoestadia" class="form-control" ></select>
+                <select name="cmbTipoEstadia" id="cmbTipoEstadia" class="form-control" ></select>
             </div>
         </div>
         <div class="form-group">
-            <label for='idtipopoliza' class='col-sm-2 control-label'>tipopoliza</label>
+            <label for='cmbTipoPoliza' class='col-sm-2 control-label'>Tipo Poliza</label>
             <div class="col-sm-7">
-                <select name="idtipopoliza" id="idtipopoliza" class="form-control" ></select>
+                <select name="cmbTipoPoliza" id="cmbTipoPoliza" class="form-control" ></select>
             </div>
         </div>
         <div class="form-group">
-            <label for='iddepartamento' class='col-sm-2 control-label'>departamento</label>
+            <label for='cmbDepartamento' class='col-sm-2 control-label'>Departamento</label>
             <div class="col-sm-7">
-                <select name="iddepartamento" id="iddepartamento" class="form-control" ></select>
-            </div>
-        </div>
-        <input type="hidden" name="status" id="status" />
-        <div class="form-group">
-            <label for='numeroasignacion' class='col-sm-2 control-label'>numeroasignacion</label>
-            <div class="col-sm-7">
-                <input id="numeroasignacion" name="numeroasignacion" class="form-control" type="text" data-type="numeric"  data-required="TRUE" />
+                <select name="cmbDepartamento" id="cmbDepartamento" class="form-control" ></select>
             </div>
         </div>
         <div class="form-group">
-            <label for='fechaasignacion' class='col-sm-2 control-label'>fechaasignacion</label>
+            <label for='txtFechaTerminoPoliza' class='col-sm-2 control-label'>Fecha Termino Poliza</label>
             <div class="col-sm-7">
-                <input id="fechaasignacion" name="fechaasignacion" class="form-control"  type="text" data-type="date"  data-required="TRUE" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for='fechaterminopoliza' class='col-sm-2 control-label'>fechaterminopoliza</label>
-            <div class="col-sm-7">
-                <input id="fechaterminopoliza" name="fechaterminopoliza" class="form-control"  type="text" data-type="date"  data-required="TRUE" />
+                <input id="txtFechaTerminoPoliza" name="txtFechaTerminoPoliza" class="form-control"  type="text" data-type="date"  data-required="TRUE" />
             </div>
         </div>
     </fieldset>

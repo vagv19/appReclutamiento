@@ -355,7 +355,7 @@ $("#btnCancelarEntrevista").click(function(e){
     
 });
 $("#btnSubirBolsaPractica").click(function(){
-    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=43&accion=subirbp&idcandidato=1",function(data){
+    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=43&accion=subirbp&idcandidato="+$(this).attr('data-idcandidato'),function(data){
         if(data !== "0")
         {
             var response = $.parseJSON(data);
@@ -364,9 +364,15 @@ $("#btnSubirBolsaPractica").click(function(){
         }
     });
 });
+$("#btnAsignarPracticante").click(function(){
+   sendRequest("POST","asignacionpractica.php",true,"idcandidato="+$(this).attr('data-idcandidato'),function(data){
+       $("#mBoxContainer").html(data);
+       $("#mBox").modal('show');
+   }) ;
+});
 $("#btnSolicitudPendiente").click(function(){
     var $modal = $("#mBox");
-    sendRequest("POST","solicitudpendiente.php",true,"idcandidato=1",function(data){
+    sendRequest("POST","solicitudpendiente.php",true,"idcandidato="+$(this).attr('data-idcandidato'),function(data){
        $modal.modal('ocultarGuardar');
         $("#mBoxContainer").html(data);
        $modal.modal('show');

@@ -52,7 +52,7 @@ session_start();
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" style="font-size:16px">
-                <li><a href="#"><i class="glyphicon glyphicon-comment"></i></a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-comment"></i><span class="badge badge-message">1</span></a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
                 <li><a href="induccion.php"><i class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
