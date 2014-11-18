@@ -40,19 +40,20 @@
 			</div>
 		</div>
 	</div>
-    <!--mBoxBusquedas -->
-	<div class="modal fade" id="mBoxAlert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <!-- /mBoxBusquedas -->
+	<div class="modal fade" id="mBoxMensaje" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div id="mBoxAlertHeader" class="modal-header">
+				<div id="mBoxMensajeHeader" class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 id="mBoxAlertTitle" class="modal-title">Titulo</h4>
+					<h4 id="mBoxMensajeTitle" class="modal-title">Titulo</h4>
 				</div>
-				<div id="mBoxAlertBody" class="modal-body">				
+				<div id="mBoxMensajeBody" class="modal-body">				
 					
 				</div>
-				<div id="mBoxAlertFooter" class="modal-footer">
-					<button id="btnCerrarModal" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<div id="mBoxMensajeFooter" class="modal-footer">
+					<button id="btnCerrarModal" type="button" class="btn btn-default message-button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+					<button id="btnAceptarMensaje" type="button" class="btn btn-default message-button-send" data-dismiss="modal"><i class="glyphicon glyphicon-send"></i></button>
 				</div>
 			</div>
 		</div>
@@ -72,16 +73,5 @@
     <script src="js/datepicker/locales/bootstrap-datepicker.es.js" charset="UTF-8"></script>
     <script type="text/javascript" src="js/jsfuncionesGenericas.js"></script>
     <script type="text/javascript" src="js/jsfunciones.js"></script>
-    <script type="text/javascript">
-    	$(document).scroll(function(){
-    		if($(this).scrollTop()==0)
-    		{
-    			$("#navBarTop").fadeIn(100);
-    		}
-    		else{
-    			$("#navBarTop").fadeOut(100);
-    		}
-    	})
-    </script>
   </body>
 </html>

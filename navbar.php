@@ -41,7 +41,7 @@
 									  <button id="btnAgregar" data-accion="insert" type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i> Agregar</button>
 									  <button id="btnEliminar" data-accion="delete" type="button" class="btn btn-default"><i class="glyphicon glyphicon-remove-sign"></i> Eliminar</button>
 									  <button id="btnReactivar" data-accion="reactivate" type="button" class="btn btn-default" style="display:none;"><i class="glyphicon glyphicon-ok-circle"></i> Reactivar</button>
-									  <button id="btnModificar" data-accion="update" type="button" class="btn btn-default"><i class="glyphicon glyphicon-edit"></i> Modificar</button>
+									  <button id="btnModificar" data-accion="update" type="button" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i> Modificar</button>
 									</div>									
 								</div>
 								

@@ -210,7 +210,7 @@ class conexion
 						{
 							$body.='<td style="width:100px;">
 								<div class="btn-group">
-									 <button id="" data-table="'.$tabla.'" data-id="'.$rs->Fields($j).'" data-campo="'.$field->name.'" data-accion="update" type="button" class="btn btn-default" style="padding:5px 3px;"><i class="glyphicon glyphicon-edit"></i></button>
+									 <button id="" data-table="'.$tabla.'" data-id="'.$rs->Fields($j).'" data-campo="'.$field->name.'" data-accion="update" type="button" class="btn btn-default" style="padding:5px 3px;"><i class="glyphicon glyphicon-pencil"></i></button>
 									 <button id="" data-table="'.$tabla.'" data-id="'.$rs->Fields($j).'" data-campo="'.$field->name.'" data-accion="delete" type="button" class="btn btn-default" style="padding:5px 3px;"><i class="glyphicon glyphicon-remove-sign"></i></button>
 								 </div>
 							</td>';

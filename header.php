@@ -52,13 +52,24 @@ session_start();
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" style="font-size:16px">
-                <li><a href="#"><i class="glyphicon glyphicon-comment"></i><span class="badge badge-message">1</span></a></li>
+                <li><a id="verMensaje" href="#"><i class="glyphicon glyphicon-comment"></i><span class="badge badge-message">1</span></a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
                 <li><a href="induccion.php"><i class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
         </div>
       </div>
     </div>
+    <div id="bandejaEntrada" class="col-sm-2" style="left: 83%;top: 51px;color:#fff;position: absolute;z-index:10000;border:solid 1px #ddd;padding:0px;background-color:#fff;display:none;">
+        <a href="#mBoxMensaje" data-toggle="modal" style="text-align:right;margin:5px;"><span class="glyphicon glyphicon-edit"></span> Nuevo Mensaje</a>
+        <div class="list-group">
+                  <a class="list-group-item list-group-inbox new-message">
+                      <h6 class="list-group-item-heading">Mensaje Nuevo</h6>
+                      <p class="list-group-item-text">Por favor etc</p>
+                  </a>
+                  <a class="list-group-item list-group-inbox">Leido</a>
+                  <a class="list-group-item list-group-inbox">Leido</a>
+              </div>
+      </div>
         <div class="col-sm-3 col-md-2 sidebar  full-sidebar">
           <ul class="nav nav-sidebar">
             <li id="dashboard" data-service='' class="active" data-table="busquedacandidato"><a href="dashboard.php">Dashboard</a></li>         
