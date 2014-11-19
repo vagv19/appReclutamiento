@@ -12,7 +12,7 @@ function mensaje(opcion,msj)
 			$("#msjError").html(msj);
 		break;
 	}
-	$("#msjError").fadeIn(40).delay(2000).fadeOut(40);
+	$("#msjError").effect("highlight", {}, 1500).delay(2000).fadeOut(40);
 }
 function sendRequest(type,url,async,data,funcion)
 {
