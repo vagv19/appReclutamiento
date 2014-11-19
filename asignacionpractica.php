@@ -2,7 +2,7 @@
     if($_REQUEST)
     {
         #terminar para traer el promedio el encargado y el departamento
-        extract($_REQUEST);
+        extract($_REQUEST); 
          include_once dirname(__FILE__).("/lib/consultas/cconexion.php");
         $cnx = new conexion();
         $sql = "";
@@ -47,26 +47,32 @@ else
             <label for='cmbEncargado' class='col-sm-2 control-label'>Encargado del Practicante</label>
             <div class="col-sm-7">
                 <select name="cmbEncargado" id="cmbEncargado" class="form-control" >
-                    <?php #añadir crearOption  ?>
+                    <?php echo $cnx->crearOption('select idencargado as id, nombre as descripcion from encargado where status=1',$bandera==true?$row['idencargado']:'-1'); ?>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label for='cmbTipoEstadia' class='col-sm-2 control-label'>Tipo Estadia</label>
             <div class="col-sm-7">
-                <select name="cmbTipoEstadia" id="cmbTipoEstadia" class="form-control" ></select>
+                <select name="cmbTipoEstadia" id="cmbTipoEstadia" class="form-control" >
+                    <?php echo $cnx->crearOption('select idtipoestadia as id, descripcion from tipoestadia where status=1',$bandera==true?$row['idtipoestadia']:'-1'); ?>
+                </select>
             </div>
         </div>
         <div class="form-group">
             <label for='cmbTipoPoliza' class='col-sm-2 control-label'>Tipo Poliza</label>
             <div class="col-sm-7">
-                <select name="cmbTipoPoliza" id="cmbTipoPoliza" class="form-control" ></select>
+                <select name="cmbTipoPoliza" id="cmbTipoPoliza" class="form-control" >
+                    <?php echo $cnx->crearOption('select idtipopoliza as id, descripcion from tipopoliza where status=1',$bandera==true?$row['idtipopoliza']:'-1'); ?>
+                </select>
             </div>
         </div>
         <div class="form-group">
             <label for='cmbDepartamento' class='col-sm-2 control-label'>Departamento</label>
             <div class="col-sm-7">
-                <select name="cmbDepartamento" id="cmbDepartamento" class="form-control" ></select>
+                <select name="cmbDepartamento" id="cmbDepartamento" class="form-control" >
+                    <?php echo $cnx->crearOption('select iddepartamento as id, descripcion from departamento where status=1',$bandera==true?$row['iddepartamento']:'-1'); ?>
+                </select>
             </div>
         </div>
         <div class="form-group">

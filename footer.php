@@ -61,13 +61,7 @@
     <!-- modal -->
     
      <script type="text/javascript" src="js/jquery.form.js"></script>
-     <script src="js/ui/jquery.ui.core.min.js"></script>
-	<script src="js/ui/jquery.ui.widget.min.js"></script>
-	<script src="js/ui/jquery.ui.position.min.js"></script>
-	<script src="js/ui/jquery.ui.menu.min.js"></script>
-	<script src="js/ui/jquery.ui.autocomplete.min.js"></script>
-	<script src="js/ui/jquery.ui.effect.min.js"></script>
-	<script src="js/ui/jquery.ui.effect-slide.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/datepicker/bootstrap-datepicker.js"></script>
     <script src="js/datepicker/locales/bootstrap-datepicker.es.js" charset="UTF-8"></script>

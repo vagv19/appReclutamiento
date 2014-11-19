@@ -291,6 +291,11 @@ $(".nav.nav-tabs > li").click(function () {
                 $("#spFechaInicioAsignacionPractica").html(response[0].fechainicio);
                 $("#spFechaTerminoAsignacionPractica").html(response[0].fechafin);
                 $("#spFechaVencimientoSeguro").html(response[0].fechaterminopoliza);
+                $("#btnSubirBolsaPractica").attr('data-idcandidato',response[0].idcandidato)
+                $("#btnAsignarPracticante").attr('data-idcandidato',response[0].idcandidato)
+                $("#btnProrrogarPracticante").attr('data-idcandidato',response[0].idcandidato)
+                $("#btnCalificarPracticante").attr('data-idcandidato',response[0].idcandidato)
+                $("#btnSolicitudPendiente").attr('data-idcandidato',response[0].idcandidato)
             }
         });
         return;
@@ -366,11 +371,10 @@ $("#btnAsignarPracticante").click(function () {
     });
 });
 $("#btnSolicitudPendiente").click(function () {
-    var $modal = $("#mBox");
     sendRequest("POST", "solicitudpendiente.php", true, "idcandidato=" + $(this).attr('data-idcandidato'), function (data) {
-        $modal.modal('ocultarGuardar');
+        $("#mBox").modal('ocultarGuardar');
         $("#mBoxContainer").html(data);
-        $modal.modal('show');
+        $("#mBox").modal('show');
     });
 });
 $("#verMensaje").click(function(){

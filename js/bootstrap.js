@@ -1003,7 +1003,11 @@ if (typeof jQuery === 'undefined') {
         that.$element.trigger('focus').trigger(e)
     })
   }
-
+   Modal.prototype.ocultarGuardar = function () {
+          $("#btnGuardarModal").fadeOut(40);
+  }
+  Modal.prototype.mostrarGuardar = function () {
+      $("#btnGuardarModal").fadeIn(40);}
   Modal.prototype.hide = function (e) {
     if (e) e.preventDefault()
 
