@@ -81,10 +81,18 @@
             <input id="txtFechaFin" name="txtFechaFin" class="form-control" type="text" data-type="date" data-required="TRUE" value="<?php echo $bandera == true? $row['fechafin']:'' ?>"/>
         </div>
     </div>    
-    <div class="checkbox col-sm-offset-2">
-        <label>
-          <input id="chkTitulo" name="chkTitulo" type="checkbox" value="1"  <?php echo $bandera == true? $row['titulo'] =='1'?"checked":'':'' ?>/> Titulo
-        </label>
+    <div class="form-group">
+        <label for="cmbEstadoEstudio" class="col-sm-2 control-label">Estado Estudio</label>
+        <div class="col-sm-7">
+            <div class="input-group">
+                <select name="cmbEstadoEstudio" id="cmbEstadoEstudio" class="form-control">
+                    <?php echo $cnx->crearOption('select idestatusestudio as id,descripcion from statusestudio where status=1',$bandera == true ? $row['idestatusestudio']:'-1',true); ?>
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" data-servicio="" id="btnExaminarEstadoEstudio"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div><!-- /input-group -->    
+        </div>
     </div>
     <div class="form-group">
         <label for="txtCedulaprofesional" class="col-sm-2 control-label">Cedula Profesional</label>

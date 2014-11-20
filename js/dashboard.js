@@ -227,8 +227,13 @@ $("body").delegate("#btnGuardarModal", "click", function () {
         servicio = "41";
         tabla = "estudiosocioecfamiliar";
         break;
+    case "procesopracticascandidato":
+        servicio = "43";
+        accion ="asignarpracticante";
+        tabla="practica";    
+        break;
     }
-    sendRequest("POST", "lib/consultas/servicio.php", true, "servicio=" + servicio + "&tabla=" + tabla + "&" + $("#frm" + tabla).serialize() + "&accion=" + accion, function (data) {
+    sendRequest("POST", "lib/consultas/servicio.php", true, "servicio=" + servicio + "&tabla=" + tabla + "&" + $("#frm" + tabla).serialize() + "&accion=" + accion + "&idempleado=0" + "&idcandidato=1", function (data) {
         var response = $.parseJSON(data);
         mensaje(response.codigo, response.mensaje);
         if (response.codigo == "1") {
@@ -275,7 +280,7 @@ $(".nav.nav-tabs > li").click(function () {
         return;
         break;
     case 'estudiocandidato':
-        campos = 'idestudio,"Fecha Inicio","Fecha Fin","Carrera","Institucion",grado,"Ciclo Escolar","Titulo","Cedula Profesional",promedio';
+        campos = 'idestudio,"Fecha Inicio","Fecha Fin","Carrera","Institucion",grado,"Ciclo Escolar","Estudio","Cedula Profesional",promedio';
         break;
     case 'estudiosocioecfamiliarcandidato':
         campos = 'idestudiosocioecfamiliar,fecha, "Estructura Familiar","Organizacion Familiar","Salud","Alimentacion","Situacion Economica","Vivienda","Religion","Observaciones","Resultado","Entrevistado por"';
@@ -366,6 +371,7 @@ $("#btnSubirBolsaPractica").click(function () {
 });
 $("#btnAsignarPracticante").click(function () {
     sendRequest("POST", "asignacionpractica.php", true, "idcandidato=" + $(this).attr('data-idcandidato'), function (data) {
+        $("#mBoxTitle").html('Asignacion de Practicas');
         $("#mBoxContainer").html(data);
         $("#mBox").modal('show');
     });

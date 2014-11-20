@@ -748,10 +748,11 @@ where idempleado = $idempleado";
                                     </div>
                                 </div>
                                 </div>
+                                <div id="bsqResultado" class="col-sm-8"></div>
                             </div>             
                         </div>';
                  $tabcontent .= '</div>';
-                 echo $tab.$tabcontent."<div id='bsqResultado' class=''></div>";    
+                 echo $tab.$tabcontent;    
             break;
             case '36':
                 $sql = "select idcicloescolar, descripcion from cicloescolar where descripcion like upper('%$txtBuscarCicloEscolar%')";
@@ -783,10 +784,11 @@ where idempleado = $idempleado";
                                     </div>
                                 </div>
                                 </div>
+                                <div id="bsqResultado" class="col-sm-8"></div>
                             </div>             
                         </div>';
                  $tabcontent .= '</div>';
-                 echo $tab.$tabcontent."<div id='bsqResultado' class=''></div>";  
+                 echo $tab.$tabcontent;  
             break;
             case '38':
                     $sql = "select idcarrera,descripcion from carrera where descripcion like upper('%$txtBuscarCarrera%')";
@@ -794,7 +796,7 @@ where idempleado = $idempleado";
                     echo $cnx->returnListGroup($sql,"cmbCarrera");
             break;
             case '39':
-                     $cnx = new conexion();
+                 $cnx = new conexion();
                  $tabcontent = "";
                  $sql = 'select * from viewinstitucionmasusada';
                  $tab = '<ul class="nav nav-tabs">';
@@ -818,10 +820,11 @@ where idempleado = $idempleado";
                                     </div>
                                 </div>
                                 </div>
+                                <div id="bsqResultado" class="col-sm-8"></div>
                             </div>             
                         </div>';
                  $tabcontent .= '</div>';
-                 echo $tab.$tabcontent."<div id='bsqResultado' class=''></div>";  
+                 echo $tab.$tabcontent;  
             break;
             case '40':
                     $sql = "select idinstitucion,descripcion from institucion where descripcion like upper('%$txtBuscarInstitucion%')";
@@ -857,14 +860,27 @@ where idempleado = $idempleado";
                 switch($accion)
                 {
                     case 'asignarpracticante':
-                        #codigo de asignacion
+                            $idpractica = "(select coalesce(max(idpractica)+1,1) from practica)";
+                            $numeroasignacion = "(select coalesce(max(numeroasignacion)+1,1) from practica where idcandidato=$idcandidato)";
+                            $sql = "insert into practica(idpractica,fechainicio,fechafin,numeroficha,montoayuda,idencargado,idtipoestadia,idtipopoliza,iddepartamento,fechaterminopoliza,idempleado,idcandidato,numeroasignacion,fechaasignacion,prorroga)
+                            values($idpractica,'$txtFechaInicio','$txtFechaFin',$txtNumeroFicha,$txtMontoAyuda,$cmbEncargado,$cmbTipoEstadia,$cmbTipoPoliza,$cmbDepartamento,'$txtFechaTerminoPoliza',$idempleado,$idcandidato,$numeroasignacion,localtimestamp(2),0)";        
+                        execQuery($sql);
                     break;
                     case 'calificarpracticante':
                         #codigo calificacion
                     break;
                     case 'subirbp':
-                        $sql = "update candidato set idclasificacion = 22 where idcandidato = $idcandidato";
-                        execQuery($sql);
+                        $sql = "select fnsubirbolsapractica( $idcandidato);";
+                        $cnx = new conexion();
+                        $r = $cnx->executeNonQuery($sql);
+                        if($r == "1")
+                        {
+                            echo '{"codigo":"1","mensaje":"Datos Actualizados correctamente"}';
+                        }
+                        else
+                        {
+                            echo '{"codigo":"2","mensaje":"El candidato no cumple con el promedio requerido o no le ha sido capturado"}';		
+                        }
                     break;
                     case 'versolicitudpendiente':
                         $sql= "select * from solicitudpendiente where idcandidato = $idcandidato";
@@ -872,6 +888,42 @@ where idempleado = $idempleado";
                         echo $cnx->returnJSON($sql);
                     break;
                 }
+            break;
+            case '44':
+                $cnx = new conexion();
+                 $tabcontent = "";
+                 $sql = 'select * from viewstatusestudiomasusado';
+                 $tab = '<ul class="nav nav-tabs">';
+                 $tab .= '<li class="active"><a data-toggle="tab" href="#masUsadas">Mas Usadas</a></li>';
+                 $tab .= '<li><a data-toggle="tab" href="#buscarPorNombre">Buscar <i class="glyphicon glyphicon-search"></i></a></li>';                
+                 $tab .= '</ul>';
+                 $tabcontent .= '<div class="tab-content" style="margin-top:20px">';
+                 $tabcontent .= '<div id="masUsadas" class="tab-pane fade in active">'.$cnx->returnListGroup($sql,"cmbEstadoEstudio").'</div>';
+                 $tabcontent .= '<div id="buscarPorNombre" class="tab-pane fade">
+                                    <div class="container">
+                                        <div class="col-sm-8 form-group">                                
+                                            <label class="control-label col-sm-1" for="txtBuscarEstadoEstudio">Buscar</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">                  
+                                                  <input id="txtBuscarEstadoEstudio" type="text" class="form-control"/>
+                                                  <span class="input-group-btn">
+                                                    <button id="btnBuscarEstadoEstudioNombre" class="btn btn-default" type="button">
+                                                        <i class="glyphicon glyphicon-search"></i>  
+                                                    </button>
+                                                  </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="bsqResultado" class="col-sm-8"></div>
+                                    </div>             
+                                </div>';
+                 $tabcontent .= '</div>';
+                 echo $tab.$tabcontent; 
+            break;
+            case '45':
+                $sql = "select idestatusestudio,descripcion from statusestudio where descripcion like upper('%$txtBuscarEstadoEstudio%')";
+                $cnx = new conexion();
+                echo $cnx->returnListGroup($sql,"cmbEstadoEstudio");
             break;
 			default:                
 				die("No estas autorizado para estar aqui");

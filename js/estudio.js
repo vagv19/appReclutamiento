@@ -21,7 +21,12 @@ function toggleModal(modal,visible)
        });
        toggleModal($("#mBoxBusqueda"),"show"); 
     }); 
-
+$("#btnExaminarEstadoEstudio").click(function(){
+    sendRequest("POST","lib/consultas/servicio.php",false,"servicio=44",function(data){
+           $("#mBoxBodyBusqueda").html(data);
+       });
+       toggleModal($("#mBoxBusqueda"),"show");
+});
 $("body").delegate("div.list-group > a","click",function(){
     var obj = $(this).attr("data-object");
     $("#"+obj).val($(this).attr('data-id'));
@@ -36,6 +41,10 @@ $("body").delegate("div.list-group > a","click",function(){
     });
 }).delegate("#btnBuscarInstitucionNombre","click",function(){
     sendRequest("POST","lib/consultas/servicio.php",true,"servicio=40&txtBuscarInstitucion="+$("#txtBuscarInstitucion").val(),function(data) {
+        $("#bsqResultado").html(data);
+    });
+}).delegate("#btnBuscarEstadoEstudioNombre","click",function(){
+    sendRequest("POST","lib/consultas/servicio.php",true,"servicio=45&txtBuscarEstadoEstudio="+$("#txtBuscarEstadoEstudio").val(),function(data) {
         $("#bsqResultado").html(data);
     });
 });
